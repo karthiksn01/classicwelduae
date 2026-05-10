@@ -1,0 +1,18 @@
+# Frontend
+CLASSICWELD-FRONTEND/node_modules/
+CLASSICWELD-FRONTEND/dist/
+CLASSICWELD-FRONTEND/.env.local
+CLASSICWELD-FRONTEND/.env.*.local
+
+# Backend
+CLASSICWELD-BACKEND/vendor/
+CLASSICWELD-BACKEND/.env
+CLASSICWELD-BACKEND/storage/*.key
+CLASSICWELD-BACKEND/public/storage
+CLASSICWELD-BACKEND/public/hot
+CLASSICWELD-BACKEND/database/database.sqlite
+CLASSICWELD-BACKEND/database/database.sqlite-journal
+
+# OS files
+.DS_Store
+Thumbs.db
