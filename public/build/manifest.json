@@ -1,0 +1,23 @@
+{
+  "resources/css/style.css": {
+    "file": "assets/style-KJXrHlw2.css",
+    "src": "resources/css/style.css",
+    "isEntry": true,
+    "name": "style",
+    "names": [
+      "style.css"
+    ]
+  },
+  "resources/js/main.js": {
+    "file": "assets/main-CCK2dq8B.js",
+    "name": "main",
+    "src": "resources/js/main.js",
+    "isEntry": true
+  },
+  "resources/js/product-updater.js": {
+    "file": "assets/product-updater-Damd2TyP.js",
+    "name": "product-updater",
+    "src": "resources/js/product-updater.js",
+    "isEntry": true
+  }
+}
