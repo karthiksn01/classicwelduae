@@ -93,9 +93,9 @@
         <div class="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#000000]/70 to-transparent"></div>
       </div>
 
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-48 md:pt-64">
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-48 md:pt-48">
         <div class="max-w-5xl animate-fade-in-up text-left">
-          <h1 class="text-4xl sm:text-5xl md:text-8xl font-bold tracking-tight mb-4 md:mb-8 leading-tight always-white">
+          <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-4 md:mb-8 leading-tight always-white">
             Embrace the <br>
             <span class="text-gradient">Future of Industrial Excellence</span>
           </h1>
@@ -164,10 +164,10 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+        <div class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 no-scrollbar snap-x snap-mandatory -mx-4 px-4 pb-8 md:mx-0 md:px-0 md:pb-0">
           <!-- 1. Welding Equipment Supply -->
           <div
-            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
+            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full shrink-0 w-[85%] md:w-auto snap-center">
             <div
               class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-amber-500/10 flex items-center justify-center text-weld-orange text-2xl md:text-3xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">
               <i class="ph-fill ph-gear"></i>
@@ -184,7 +184,7 @@
 
           <!-- 2. Bulk & Industrial Supply -->
           <div
-            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
+            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full shrink-0 w-[85%] md:w-auto snap-center">
             <div
               class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 text-2xl md:text-3xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">
               <i class="ph-fill ph-package"></i>
@@ -202,7 +202,7 @@
 
           <!-- 3. Custom Orders & RFQ -->
           <div
-            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
+            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full shrink-0 w-[85%] md:w-auto snap-center">
             <div
               class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 text-2xl md:text-3xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">
               <i class="ph-fill ph-receipt"></i>
@@ -221,7 +221,7 @@
 
           <!-- 4. Welding Consumables -->
           <div
-            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
+            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full shrink-0 w-[85%] md:w-auto snap-center">
             <div
               class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400 text-2xl md:text-3xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">
               <i class="ph-fill ph-fire"></i>
@@ -238,7 +238,7 @@
 
           <!-- 5. Equipment Consultation -->
           <div
-            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
+            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full shrink-0 w-[85%] md:w-auto snap-center">
             <div
               class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 text-2xl md:text-3xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">
               <i class="ph-fill ph-wrench"></i>
@@ -255,7 +255,7 @@
 
           <!-- 6. After-Sales Support -->
           <div
-            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
+            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full shrink-0 w-[85%] md:w-auto snap-center">
             <div
               class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-teal-500/10 flex items-center justify-center text-teal-400 text-2xl md:text-3xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">
               <i class="ph-fill ph-arrows-clockwise"></i>
@@ -272,7 +272,7 @@
 
           <!-- 7. Safety & Training -->
           <div
-            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
+            class="group p-5 md:p-8 rounded-2xl bg-zinc-900 border border-zinc-800/50 hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full shrink-0 w-[85%] md:w-auto snap-center">
             <div
               class="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-yellow-500/10 flex items-center justify-center text-yellow-400 text-2xl md:text-3xl mb-4 md:mb-6 group-hover:scale-110 transition-transform">
               <i class="ph-fill ph-shield-check"></i>

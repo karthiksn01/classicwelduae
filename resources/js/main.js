@@ -911,28 +911,37 @@ async function fetchFeaturedProducts() {
             const brand = "ClassicWeld";
             
             html += `
-                <div class="w-full h-full flex-shrink-0 flex flex-col md:flex-row bg-zinc-900">
-                    <div class="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center relative z-20">
-                       <h4 class="text-weld-orange font-bold uppercase tracking-widest mb-2">${brand}</h4>
-                       <h2 class="text-2xl md:text-4xl font-bold text-white mb-4 leading-tight">${product.name}</h2>
-                       <p class="text-gray-400 mb-6 line-clamp-3 text-base">${product.description || 'Premium industrial welding equipment built for precision and performance.'}</p>
-                       <div class="flex gap-4">
-                           <button onclick="window.location.href='/product-detail?id=${product.id}'" class="bg-weld-orange hover:bg-amber-600 text-white px-8 py-4 rounded-lg font-bold transition-all shadow-lg shadow-amber-500/30 flex items-center gap-2">
-                               View Details <i class="ph ph-arrow-right"></i>
-                           </button>
+                <div class="w-full h-full flex-shrink-0 flex flex-col md:flex-row bg-zinc-900 relative overflow-hidden group/carousel">
+                    <!-- IMAGE (Mobile: Full background, Desktop: Side half) -->
+                    <div class="absolute inset-0 md:relative md:w-1/2 h-full cursor-pointer z-0 md:z-10" onclick="window.location.href='/product-detail?id=${product.id}'">
+                       <img src="${imgSrc}" alt="${product.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                       <div class="absolute inset-0 bg-black/40 md:hidden"></div> <!-- Dark overlay for mobile text readability -->
+                       <div class="absolute inset-y-0 left-0 bg-gradient-to-r from-zinc-900 via-zinc-900/50 to-transparent z-10 hidden md:block w-32"></div>
+                    </div>
+
+                    <!-- TEXT CONTENT -->
+                    <!-- Desktop: 1/2 width side content -->
+                    <!-- Mobile: Absolute bottom bar -->
+                    <div class="relative md:w-1/2 p-6 md:p-12 flex flex-col justify-end md:justify-center z-20 h-full pointer-events-none">
+                       <!-- Mobile only compact bar container -->
+                       <div class="bg-black/60 md:bg-transparent backdrop-blur-md md:backdrop-blur-none -mx-6 -mb-6 p-6 md:p-0 md:m-0 rounded-t-3xl md:rounded-none pointer-events-auto">
+                           <h4 class="text-weld-orange font-bold uppercase tracking-widest mb-1 text-[10px] md:text-sm">${brand}</h4>
+                           <h2 class="text-lg md:text-4xl font-bold text-white mb-2 leading-tight line-clamp-1 md:line-clamp-none">${product.name}</h2>
+                           <p class="text-gray-300 md:text-gray-400 mb-4 line-clamp-2 md:line-clamp-3 text-xs md:text-base font-light">${product.description || 'Premium industrial welding equipment.'}</p>
+                           <div class="flex gap-4">
+                               <button onclick="window.location.href='/product-detail?id=${product.id}'" class="bg-weld-orange hover:bg-amber-600 text-white px-5 py-2 md:px-8 md:py-4 rounded-lg font-bold transition-all shadow-lg shadow-amber-500/30 flex items-center gap-2 text-xs md:text-base">
+                                   View Details <i class="ph ph-arrow-right"></i>
+                               </button>
+                           </div>
                        </div>
                     </div>
-                    <div class="w-full md:w-1/2 h-full cursor-pointer relative overflow-hidden group/carousel" onclick="window.location.href='/product-detail?id=${product.id}'">
-                       <div class="absolute inset-0 bg-gradient-to-r from-zinc-900 via-zinc-900/50 to-transparent z-10 hidden md:block w-32"></div>
-                       <img src="${imgSrc}" alt="${product.name}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
-                       
-                       <!-- Wishlist Button -->
-                       <button onclick="window.toggleWishlist(${product.id}, event)" 
-                               data-wishlist-id="${product.id}"
-                               class="absolute top-6 right-6 z-30 bg-black/60 backdrop-blur-md w-12 h-12 rounded-full border border-white/10 flex items-center justify-center ${window.userWishlist.includes(product.id) ? 'opacity-100' : 'opacity-0'} group-hover/carousel:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-black/80">
-                           <i class="${window.userWishlist.includes(product.id) ? 'ph-fill ph-heart text-red-500' : 'ph ph-heart text-white'} text-2xl"></i>
-                       </button>
-                    </div>
+
+                    <!-- Wishlist Button -->
+                    <button onclick="window.toggleWishlist(${product.id}, event)" 
+                            data-wishlist-id="${product.id}"
+                            class="absolute top-6 right-6 z-30 bg-black/60 backdrop-blur-md w-12 h-12 rounded-full border border-white/10 flex items-center justify-center ${window.userWishlist.includes(product.id) ? 'opacity-100' : 'opacity-0'} group-hover/carousel:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-black/80">
+                        <i class="${window.userWishlist.includes(product.id) ? 'ph-fill ph-heart text-red-500' : 'ph ph-heart text-white'} text-2xl"></i>
+                    </button>
                 </div>
             `;
         });

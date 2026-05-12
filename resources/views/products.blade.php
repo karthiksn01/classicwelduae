@@ -133,9 +133,6 @@
             
             <!-- Desktop Sticky Sidebar (Unchanged) -->
             <div class="hidden lg:block glass p-6 rounded-xl sticky top-20">
-            
-            <!-- Desktop Sticky Sidebar (Unchanged) -->
-            <div class="hidden lg:block glass p-6 rounded-xl sticky top-20">
               <h3 class="text-xl font-bold mb-4 text-white">Categories</h3>
               <ul class="space-y-3 mb-8" id="category-filter">
                 <li><a href="#" class="text-weld-orange font-bold flex justify-between items-center category-link"
@@ -156,7 +153,7 @@
 
             <!-- Desktop Top Bar (Hidden on Mobile) -->
             <div
-              class="hidden md:flex flex-col md:flex-row justify-between items-center mb-6 gap-3 md:gap-4 glass p-3 md:p-4 rounded-xl border border-white/5 sticky top-20 z-40 backdrop-blur-md bg-zinc-950/40">
+              class="hidden md:flex flex-col md:flex-row justify-between items-center mb-6 gap-3 md:gap-4 glass p-3 md:p-4 rounded-xl border border-white/5">
               <div class="relative w-full md:w-64">
                 <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                 <input type="text" id="search-input" placeholder="Search products..."
