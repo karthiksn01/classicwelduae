@@ -109,11 +109,11 @@
         <div class="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#000000]/70 to-transparent"></div>
       </div>
 
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div class="max-w-3xl animate-fade-in-up">
-          <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight always-white">
-            Forging the <br>
-            <span class="text-gradient">Future of Industry</span>
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-48">
+        <div class="max-w-5xl animate-fade-in-up">
+          <h1 class="text-6xl md:text-8xl font-bold tracking-tight mb-8 leading-tight always-white">
+            Embrace the <br>
+            <span class="text-gradient">Future of Industrial Excellence</span>
           </h1>
           <p class="text-xl md:text-2xl always-white opacity-80 mb-8 font-light">
             Premium welding equipment for professionals who demand precision, power, and performance.
