@@ -113,7 +113,7 @@
         <div class="max-w-3xl animate-fade-in-up">
           <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight always-white">
             Forging the <br>
-            <span class="text-gradient">Future of Industry karthik s n</span>
+            <span class="text-gradient">Future of Industry</span>
           </h1>
           <p class="text-xl md:text-2xl always-white opacity-80 mb-8 font-light">
             Premium welding equipment for professionals who demand precision, power, and performance.
