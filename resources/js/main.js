@@ -5,6 +5,13 @@ const BACKEND_URL = import.meta.env.VITE_API_URL || (window.location.hostname ==
     : '');
 const API_BASE_URL = `${BACKEND_URL}/api`;
 
+window.resolveImagePath = (path) => {
+    if (!path) return 'https://placehold.co/600x400/222/orange?text=ClassicWeld';
+    if (path.startsWith('http')) return path;
+    if (path.startsWith('products/')) return `${BACKEND_URL}/storage/${path}`;
+    return `${BACKEND_URL}/storage/products/${path}`;
+};
+
 // --- NEW: Wishlist State ---
 window.userWishlist = [];
 
@@ -240,8 +247,26 @@ const menuBtn = document.getElementById("mobile-menu-btn");
 const mobileMenu = document.getElementById("mobile-menu");
 
 if (menuBtn && mobileMenu) {
-  menuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
+  menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    mobileMenu.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  });
+
+  // Handle close button explicitly
+  document.addEventListener("click", (e) => {
+    const closeBtn = e.target.closest("#close-menu-btn");
+    if (closeBtn) {
+      mobileMenu.classList.add("hidden");
+      document.body.style.overflow = "";
+      return;
+    }
+
+    // Close if clicking outside the menu content when open
+    if (!mobileMenu.classList.contains("hidden") && !e.target.closest("#mobile-menu")) {
+      mobileMenu.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
   });
 }
 
@@ -520,7 +545,7 @@ if (logoutModal) {
 // Signup removed as per requirements.
 
 // Products: Dynamic Fetching
-const productGrid = document.getElementById("product-grid");
+let productGrid;
 
 let currentPage = 1;
 let currentCategory = 'All';
@@ -572,36 +597,34 @@ async function fetchProducts(page = 1) {
       const card = `
           <div class="glass rounded-xl overflow-hidden group border border-white/5 hover:border-weld-orange/50 transition-all duration-300 flex flex-col h-full relative ${isSoldOut ? 'opacity-75 grayscale-[0.5]' : ''}">
               
-              <div class="relative h-48 overflow-hidden bg-zinc-800 cursor-pointer" onclick="window.location.href='/product-detail?id=${product.id}'">
+              <div class="relative h-40 md:h-48 overflow-hidden bg-zinc-800 cursor-pointer" onclick="window.location.href='/product-detail?id=${product.id}'">
                   ${soldOutOverlay}
                   <img src="${imgSrc}" alt="${product.name}" class="w-full h-full object-cover ${isSoldOut ? '' : 'group-hover:scale-110'} transition-transform duration-500">
                   
                   <!-- Wishlist Button -->
                   <button onclick="window.toggleWishlist(${product.id}, event)" 
                           data-wishlist-id="${product.id}"
-                          class="absolute top-4 left-4 z-40 bg-black/60 backdrop-blur-md w-10 h-10 rounded-full border border-white/10 flex items-center justify-center ${window.userWishlist.includes(product.id) ? 'opacity-100' : 'opacity-0'} group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-black/80">
-                      <i class="${window.userWishlist.includes(product.id) ? 'ph-fill ph-heart text-red-500' : 'ph ph-heart text-white'} text-xl"></i>
+                          class="absolute top-2 left-2 md:top-4 md:left-4 z-40 bg-black/60 backdrop-blur-md w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/10 flex items-center justify-center ${window.userWishlist.includes(product.id) ? 'opacity-100' : 'opacity-0'} group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-black/80">
+                      <i class="${window.userWishlist.includes(product.id) ? 'ph-fill ph-heart text-red-500' : 'ph ph-heart text-white'} text-lg md:text-xl"></i>
                   </button>
 
-                  <div class="absolute top-4 right-4 bg-black/80 backdrop-blur-sm text-xs font-bold px-3 py-1 rounded-full border border-white/10 uppercase tracking-wider text-gray-300 z-30">
-                      ${product.category || "Product"}
-                  </div>
+
               </div>
-              <div class="p-5 flex-1 flex flex-col">
-                  <div class="flex justify-between items-start mb-2">
-                      <span class="text-xs text-weld-orange font-bold uppercase tracking-wider">${brand}</span>
-                      <div class="flex items-center text-xs text-yellow-500"><i class="ph-fill ph-star mr-1"></i> ${rating}</div>
+              <div class="p-3 md:p-5 flex-1 flex flex-col">
+                  <div class="flex justify-between items-start mb-1 md:mb-2">
+                      <span class="text-[10px] md:text-xs text-weld-orange font-bold uppercase tracking-wider">${brand}</span>
+                      <div class="flex items-center text-[10px] md:text-xs text-yellow-500"><i class="ph-fill ph-star mr-1"></i> ${rating}</div>
                   </div>
-                  <h3 class="text-lg font-bold mb-1 ${isSoldOut ? '' : 'group-hover:text-weld-orange'} transition-colors cursor-pointer line-clamp-2" onclick="window.location.href='/product-detail?id=${product.id}'">${product.name}</h3>
-                  <p class="text-[10px] text-gray-500 italic mb-2 line-clamp-1">${product.short_description || ''}</p>
-                  <div class="mt-auto pt-4 border-t border-white/10 mb-4">
-                      <!-- Price removed as per request -->
-                  </div>
-                  ${isDealer ? `<div class="mb-3 text-xs text-weld-orange flex items-center gap-1"><i class="ph-fill ph-check-circle"></i> MOQ: ${product.moq} Units</div>` : ""}
+                  <h3 class="text-base md:text-lg font-bold mb-1 ${isSoldOut ? '' : 'group-hover:text-weld-orange'} transition-colors cursor-pointer line-clamp-2 leading-tight" onclick="window.location.href='/product-detail?id=${product.id}'">${product.name}</h3>
+                  <p class="text-[10px] text-gray-500 italic mb-3 line-clamp-1">${product.short_description || ''}</p>
                   
-                  <div class="grid grid-cols-2 gap-2 mt-auto relative z-30">
-                      <button onclick="window.location.href='/product-detail?id=${product.id}'" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-bold py-2 rounded-lg transition-colors border border-zinc-700">Details</button>
-                      ${cartButton}
+                  ${isDealer ? `<div class="mb-3 text-[10px] md:text-xs text-weld-orange flex items-center gap-1"><i class="ph-fill ph-check-circle"></i> MOQ: ${product.moq} Units</div>` : ""}
+                  
+                  <div class="flex flex-col md:grid md:grid-cols-2 gap-2 mt-auto relative z-30">
+                      <button onclick="window.location.href='/product-detail?id=${product.id}'" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white text-xs md:text-sm font-bold py-2 rounded-lg transition-colors border border-zinc-700">Details</button>
+                      <div class="w-full">
+                        ${cartButton}
+                      </div>
                   </div>
               </div>
           </div>
@@ -645,6 +668,7 @@ window.fetchProducts = fetchProducts;
 
 async function fetchCategoriesAndRender() {
     const categoryFilterList = document.getElementById('category-filter');
+    const mobileCategoryScroll = document.getElementById('mobile-category-scroll');
     if (!categoryFilterList) return;
     
     try {
@@ -653,13 +677,19 @@ async function fetchCategoriesAndRender() {
         });
         if (res.ok) {
             const categories = await res.json();
-            // Keep existing 'All Products'
+            
+            // Render Desktop Sidebar
             categoryFilterList.innerHTML = `<li><a href="#" class="text-weld-orange font-bold flex justify-between items-center category-link" data-category="All">All Products</a></li>`;
+            
+            // Render Mobile Scroll
+            let mobileHtml = '<button class="category-link flex-shrink-0 px-6 py-2 rounded-full bg-weld-orange text-white font-bold text-xs transition-all border border-weld-orange shadow-lg shadow-weld-orange/20" data-category="All">All</button>';
             
             categories.forEach(cat => {
                 categoryFilterList.innerHTML += `<li><a href="#" class="text-gray-400 hover:text-white transition-colors flex justify-between items-center text-sm category-link" data-category="${cat.name}">${cat.name}</a></li>`;
+                mobileHtml += `<button class="category-link flex-shrink-0 px-6 py-2 rounded-full bg-zinc-900 text-gray-400 font-bold text-xs transition-all border border-white/5 whitespace-nowrap" data-category="${cat.name}">${cat.name}</button>`;
             });
             
+            if (mobileCategoryScroll) mobileCategoryScroll.innerHTML = mobileHtml;
             bindCategoryEvents();
         }
     } catch (e) {
@@ -668,19 +698,37 @@ async function fetchCategoriesAndRender() {
 }
 
 function bindCategoryEvents() {
-    const categoryLinks = document.querySelectorAll('#category-filter a');
+    const categoryLinks = document.querySelectorAll('.category-link');
     if(categoryLinks.length > 0) {
         categoryLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                categoryLinks.forEach(l => {
-                    l.classList.remove('text-weld-orange');
+                const selectedCat = link.getAttribute('data-category') || link.dataset.category || 'All';
+                
+                // Update Desktop Active Styles
+                document.querySelectorAll('#category-filter .category-link').forEach(l => {
+                    l.classList.remove('text-weld-orange', 'font-bold');
                     l.classList.add('text-gray-400');
                 });
-                link.classList.remove('text-gray-400');
-                link.classList.add('text-weld-orange');
                 
-                currentCategory = link.dataset.category || 'All';
+                // Update Mobile Active Styles
+                document.querySelectorAll('#mobile-category-scroll .category-link').forEach(l => {
+                    l.classList.remove('bg-weld-orange', 'text-white', 'border-weld-orange', 'shadow-lg', 'shadow-weld-orange/20');
+                    l.classList.add('bg-zinc-900', 'text-gray-400', 'border-white/5');
+                });
+
+                // Apply Active to matching items across both
+                document.querySelectorAll(`.category-link[data-category="${selectedCat}"]`).forEach(activeEl => {
+                    if (activeEl.tagName === 'A') {
+                        activeEl.classList.add('text-weld-orange', 'font-bold');
+                        activeEl.classList.remove('text-gray-400');
+                    } else {
+                        activeEl.classList.add('bg-weld-orange', 'text-white', 'border-weld-orange', 'shadow-lg', 'shadow-weld-orange/20');
+                        activeEl.classList.remove('bg-zinc-900', 'text-gray-400', 'border-white/5');
+                    }
+                });
+
+                currentCategory = selectedCat;
                 fetchProducts(1);
             });
         });
@@ -693,18 +741,41 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchCategoriesAndRender();
 
     const searchInput = document.getElementById('search-input');
+    const mobileSearchAlt = document.getElementById('mobile-search-input-alt');
+    
+    const handleSearchInput = (e) => {
+        currentSearch = e.target.value;
+        fetchProducts(1);
+    };
+
     if (searchInput) {
         let timeout = null;
         searchInput.addEventListener('input', (e) => {
             clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                currentSearch = e.target.value;
-                fetchProducts(1);
-            }, 500);
+            timeout = setTimeout(() => handleSearchInput(e), 500);
         });
     }
 
+    if (mobileSearchAlt) {
+        let timeout = null;
+        mobileSearchAlt.addEventListener('input', (e) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => handleSearchInput(e), 500);
+        });
+    }
+
+    const sortSelect = document.getElementById('sort-select');
+    const mobileSortSelect = document.getElementById('mobile-sort-select');
+    
+    if (sortSelect) {
+        sortSelect.addEventListener('change', () => fetchProducts(1));
+    }
+    if (mobileSortSelect) {
+        mobileSortSelect.addEventListener('change', () => fetchProducts(1));
+    }
+
     // Initial Fetch
+    productGrid = document.getElementById("product-grid");
     if (productGrid) {
         fetchProducts(1);
     }
@@ -715,6 +786,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initNavSearch();
+    
+    // Sync cart badge
+    if (window.Cart) {
+        window.Cart.updateBadge();
+    }
+
+    // Mobile More Menu Toggle
+    const initMobileMore = () => {
+        const moreBtn = document.getElementById('mobile-more-btn');
+        const moreMenu = document.getElementById('mobile-more-menu');
+        
+        if (moreBtn && moreMenu) {
+            console.log("Mobile More Menu Initialized");
+            moreBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                moreMenu.classList.toggle('hidden');
+                moreBtn.classList.toggle('text-weld-orange');
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!moreMenu.contains(e.target) && !moreBtn.contains(e.target)) {
+                    moreMenu.classList.add('hidden');
+                    moreBtn.classList.remove('text-weld-orange');
+                }
+            });
+        }
+    };
+    initMobileMore();
 });
 
 // --- COOKIE CONSENT ---
@@ -909,74 +1008,84 @@ function updateCarousel() {
 
 function initNavSearch() {
     const input = document.getElementById('nav-search-input');
+    const mobileInput = document.getElementById('mobile-search-input');
     const suggestions = document.getElementById('nav-search-suggestions');
-    if (!input || !suggestions) return;
+    if (!input && !mobileInput) return;
 
-    let timeout = null;
+    const setupInput = (inp, suggestionsId) => {
+        if (!inp) return;
+        const suggestions = document.getElementById(suggestionsId);
+        if (!suggestions) return;
+        
+        let timeout = null;
+        inp.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            clearTimeout(timeout);
 
-    input.addEventListener('input', (e) => {
-        const query = e.target.value.trim();
-        clearTimeout(timeout);
+            if (query.length < 1) {
+                suggestions.classList.add('hidden');
+                return;
+            }
 
-        if (query.length < 2) {
-            suggestions.classList.add('hidden');
-            return;
-        }
+            timeout = setTimeout(async () => {
+                try {
+                    const response = await fetch(`${API_BASE_URL}/products?search=${encodeURIComponent(query)}&page=1`, {
+                        credentials: 'include', headers: { Accept: "application/json" }
+                    });
+                    const result = await response.json();
+                    const products = result.data ? result.data.slice(0, 5) : [];
 
-        timeout = setTimeout(async () => {
-            try {
-                const response = await fetch(`${API_BASE_URL}/products?search=${encodeURIComponent(query)}&page=1`, {
-                    credentials: 'include', headers: { Accept: "application/json" }
-                });
-                const result = await response.json();
-                const products = result.data ? result.data.slice(0, 5) : [];
-
-                if (products.length > 0) {
-                    let html = '';
-                    products.forEach(p => {
-                        const imgSrc = p.image && p.image.startsWith("http") ? p.image : `https://placehold.co/100x100/222/orange?text=${encodeURIComponent(p.name[0])}`;
+                    if (products.length > 0) {
+                        let html = '';
+                        products.forEach(p => {
+                            const imgSrc = p.image && p.image.startsWith("http") ? p.image : `https://placehold.co/100x100/222/orange?text=${encodeURIComponent(p.name[0])}`;
+                            html += `
+                                <a href="/product-detail?id=${p.id}" class="flex items-center gap-3 p-3 hover:bg-zinc-800 transition-colors border-b border-white/5 last:border-0 no-underline">
+                                    <img src="${imgSrc}" class="w-10 h-10 object-cover rounded shadow" alt="${p.name}">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="text-sm font-bold text-white truncate">${p.name}</div>
+                                        <div class="text-xs text-gray-500">${p.category}</div>
+                                    </div>
+                                </a>
+                            `;
+                        });
                         html += `
-                            <a href="/product-detail?id=${p.id}" class="flex items-center gap-3 p-3 hover:bg-zinc-800 transition-colors border-b border-white/5 last:border-0 no-underline">
-                                <img src="${imgSrc}" class="w-10 h-10 object-cover rounded shadow" alt="${p.name}">
-                                <div class="flex-1 min-w-0">
-                                    <div class="text-sm font-bold text-white truncate">${p.name}</div>
-                                    <div class="text-xs text-gray-500">${p.category}</div>
-                                </div>
+                            <a href="/products?search=${encodeURIComponent(query)}" class="block p-3 text-center text-xs font-bold text-weld-orange hover:bg-zinc-800 transition-colors bg-black/20 no-underline">
+                                See all results
                             </a>
                         `;
-                    });
-                    html += `
-                        <a href="/products?search=${encodeURIComponent(query)}" class="block p-3 text-center text-xs font-bold text-weld-orange hover:bg-zinc-800 transition-colors bg-black/20 no-underline">
-                            See all results
-                        </a>
-                    `;
-                    suggestions.innerHTML = html;
-                    suggestions.classList.remove('hidden');
-                } else {
-                    suggestions.innerHTML = '<div class="p-4 text-center text-sm text-gray-500">No matches found</div>';
-                    suggestions.classList.remove('hidden');
+                        suggestions.innerHTML = html;
+                        suggestions.classList.remove('hidden');
+                    } else {
+                        suggestions.innerHTML = '<div class="p-4 text-center text-sm text-gray-500">No matches found</div>';
+                        suggestions.classList.remove('hidden');
+                    }
+                } catch (err) {
+                    console.error("Nav search error:", err);
                 }
-            } catch (err) {
-                console.error("Nav search error:", err);
+            }, 300);
+        });
+
+        inp.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                window.location.href = `/products?search=${encodeURIComponent(inp.value.trim())}`;
             }
-        }, 300);
-    });
+        });
+        
+        // Close suggestions when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!inp.contains(e.target) && !suggestions.contains(e.target)) {
+                suggestions.classList.add('hidden');
+            }
+        });
+    };
 
-    // Close suggestions when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!input.contains(e.target) && !suggestions.contains(e.target)) {
-            suggestions.classList.add('hidden');
-        }
-    });
-
-    // Handle enter key
-    input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            window.location.href = `/products?search=${encodeURIComponent(input.value.trim())}`;
-        }
-    });
+    setupInput(input, 'nav-search-suggestions');
+    setupInput(mobileInput, 'mobile-search-suggestions');
 }
-// Init Wishlist on load
+
+// Init search and Wishlist on load
+// initNavSearch is already called in DOMContentLoaded
 fetchWishlistIds();
 
 

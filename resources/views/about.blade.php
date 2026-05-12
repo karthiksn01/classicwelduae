@@ -81,7 +81,7 @@
               </div>
             </div>
             <div class="flex items-center space-x-4">
-              <div class="relative group" id="nav-search-container">
+              <div class="relative group hidden md:block" id="nav-search-container">
                 <div class="flex items-center bg-zinc-900/50 border border-white/10 rounded-full px-4 py-1.5 focus-within:border-weld-orange transition-all duration-300">
                   <i class="ph ph-magnifying-glass text-gray-400 mr-2"></i>
                   <input type="text" id="nav-search-input" placeholder="Search..." class="bg-transparent border-none focus:outline-none text-sm w-24 md:w-40 transition-all duration-300 focus:w-40 md:focus:w-64">
@@ -91,7 +91,7 @@
                 </div>
               </div>
               <button
-                class="text-gray-300 hover:text-white transition-colors relative"
+                class="text-gray-300 hover:text-white transition-colors relative hidden md:block"
               >
                 <i class="ph ph-shopping-cart text-xl"></i>
                 <span
@@ -99,27 +99,19 @@
                   >0</span
                 >
               </button>
-              <a href="/admin/login" class="text-gray-300 hover:text-white transition-colors" title="Admin Login"><i class="ph ph-user text-xl"></i></a><button onclick="toggleTheme()" class="text-gray-300 hover:text-white transition-colors" title="Toggle Theme"><i class="ph ph-sun theme-toggle-icon text-xl"></i></button>
+              <a href="/admin/login" class="text-gray-300 hover:text-white transition-colors hidden md:block" title="Admin Login"><i class="ph ph-user text-xl"></i></a><button onclick="toggleTheme()" class="text-gray-300 hover:text-white transition-colors hidden md:block" title="Toggle Theme"><i class="ph ph-sun theme-toggle-icon text-xl"></i></button>
             </div>
-            <div class="-mr-2 flex md:hidden">
-              <button type="button" id="mobile-menu-btn" class="bg-zinc-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                <span class="sr-only">Open main menu</span>
-                <i class="ph ph-list text-2xl"></i>
+            <div class="flex md:hidden items-center space-x-4">
+              <button onclick="toggleTheme()" class="text-gray-400 hover:text-white transition-colors" title="Toggle Theme">
+                <i class="ph ph-sun theme-toggle-icon text-3xl"></i>
               </button>
+              <a href="/admin/login" class="text-gray-400 hover:text-white transition-colors" title="Admin Login">
+                <i class="ph ph-user text-3xl"></i>
+              </a>
             </div>
           </div>
         </div>
-        <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="hidden md:hidden bg-zinc-900 border-t border-zinc-800" id="mobile-menu">
-          <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="/" class="text-gray-300 hover:text-white hover:bg-zinc-800 block px-3 py-2 rounded-md text-base font-medium">Home</a>
-            <a href="/products" class="text-gray-300 hover:text-white hover:bg-zinc-800 block px-3 py-2 rounded-md text-base font-medium">Products</a>
-            <a href="/#services" class="text-gray-300 hover:text-white hover:bg-zinc-800 block px-3 py-2 rounded-md text-base font-medium">Services</a>
-            <a href="/about" class="text-gray-300 hover:text-white hover:bg-zinc-800 block px-3 py-2 rounded-md text-base font-medium">About</a>
-            <a href="/contact" class="text-gray-300 hover:text-white hover:bg-zinc-800 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-            <a href="/feedback" class="text-gray-300 hover:text-white hover:bg-zinc-800 block px-3 py-2 rounded-md text-base font-medium">Feedback</a>
-          <a href="/admin/login" class="text-gray-300 hover:text-white hover:bg-zinc-800 block px-3 py-2 rounded-md text-base font-medium">Admin Login</a></div>
-        </div>
+
       </nav>
 
       <!-- About Hero -->
@@ -140,13 +132,13 @@
         </div>
 
         <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
-          <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-fade-in-up">
+          <h1 class="text-3xl md:text-6xl font-bold mb-6 animate-fade-in-up leading-tight">
             Building Trust in <br /><span class="text-gradient"
               >Every Spark</span
             >
           </h1>
           <p
-            class="text-xl text-gray-400 max-w-2xl mx-auto animate-fade-in-up"
+            class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto animate-fade-in-up leading-relaxed"
             style="animation-delay: 0.2s"
           >
             Since 2025, CLASSICWELD has been the backbone of industrial
@@ -170,28 +162,28 @@
                 alt="Welder working"
               />
             </div>
-            <div>
+            <div class="space-y-6">
               <h2
-                class="text-3xl font-bold mb-6 border-l-4 border-weld-orange pl-6"
+                class="text-2xl md:text-3xl font-bold mb-6 border-l-4 border-weld-orange pl-6 leading-tight"
               >
                 Forging a Legacy
               </h2>
-              <p class="text-gray-400 mb-6 leading-relaxed">
+              <p class="text-gray-400 text-base md:text-lg mb-6 leading-relaxed">
                 What started as a small workshop in Dubai has grown into a
                 global powerhouse. We understood early on that welding isn't
                 just about joining metals; it's about structural integrity,
                 safety, and the art of creation.
               </p>
-              <p class="text-gray-400 mb-6 leading-relaxed">
+              <p class="text-gray-400 text-base md:text-lg mb-6 leading-relaxed">
                 Our precision-engineered equipment is trusted by aerospace
                 engineers, automotive manufacturers, and construction giants
                 alike.
               </p>
-              <div class="grid grid-cols-1">
+              <div class="grid grid-cols-1 pt-4">
                 <div>
-                  <h3 class="text-weld-orange text-4xl font-bold">5M+</h3>
+                  <h3 class="text-weld-orange text-3xl md:text-4xl font-bold">5M+</h3>
                   <p
-                    class="text-sm text-gray-500 uppercase tracking-widest mt-1"
+                    class="text-xs text-gray-500 uppercase tracking-widest mt-1"
                   >
                     Happy Welders
                   </p>
@@ -205,46 +197,46 @@
       <!-- Values -->
       <section class="py-20 bg-zinc-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 class="text-3xl font-bold mb-16">Core Values</h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h2 class="text-2xl md:text-3xl font-bold mb-12 md:mb-16">Core Values</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             <div
-              class="glass p-8 rounded-xl hover:bg-zinc-800 transition-colors"
+              class="glass p-6 md:p-8 rounded-xl hover:bg-zinc-800 transition-colors"
             >
               <div
-                class="bg-weld-orange/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+                class="bg-weld-orange/10 w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-6"
               >
-                <i class="ph ph-shield-check text-3xl text-weld-orange"></i>
+                <i class="ph ph-shield-check text-2xl md:text-3xl text-weld-orange"></i>
               </div>
-              <h3 class="text-xl font-bold mb-3">Safety First</h3>
-              <p class="text-gray-400 text-sm">
+              <h3 class="text-lg md:text-xl font-bold mb-3">Safety First</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
                 We compromise on nothing when it comes to the safety of the
                 operator. Every helmet, every glove is tested to extremes.
               </p>
             </div>
             <div
-              class="glass p-8 rounded-xl hover:bg-zinc-800 transition-colors"
+              class="glass p-6 md:p-8 rounded-xl hover:bg-zinc-800 transition-colors"
             >
               <div
-                class="bg-weld-orange/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+                class="bg-weld-orange/10 w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-6"
               >
-                <i class="ph ph-atom text-3xl text-weld-orange"></i>
+                <i class="ph ph-atom text-2xl md:text-3xl text-weld-orange"></i>
               </div>
-              <h3 class="text-xl font-bold mb-3">Innovation</h3>
-              <p class="text-gray-400 text-sm">
+              <h3 class="text-lg md:text-xl font-bold mb-3">Innovation</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
                 Constantly pushing the boundaries of arc stability and energy
                 efficiency in our inverter designs.
               </p>
             </div>
             <div
-              class="glass p-8 rounded-xl hover:bg-zinc-800 transition-colors"
+              class="glass p-6 md:p-8 rounded-xl hover:bg-zinc-800 transition-colors"
             >
               <div
-                class="bg-weld-orange/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+                class="bg-weld-orange/10 w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center mx-auto mb-6"
               >
-                <i class="ph ph-handshake text-3xl text-weld-orange"></i>
+                <i class="ph ph-handshake text-2xl md:text-3xl text-weld-orange"></i>
               </div>
-              <h3 class="text-xl font-bold mb-3">Integrity</h3>
-              <p class="text-gray-400 text-sm">
+              <h3 class="text-lg md:text-xl font-bold mb-3">Integrity</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
                 Honest pricing, transparent warranties, and a commitment to
                 sustainability in manufacturing.
               </p>
@@ -294,6 +286,53 @@
         </div>
       </section>
 
+      <!-- Mobile Fixed Bottom Navigation -->
+      <div class="md:hidden fixed bottom-0 left-0 w-full bg-zinc-950/90 backdrop-blur-xl border-t border-white/5 py-3 px-6 z-50 flex items-center justify-between shadow-2xl">
+          <a href="/" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
+              <i class="ph ph-house text-2xl"></i>
+              <span class="text-[10px] font-bold">Home</span>
+          </a>
+          <a href="/products" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
+              <i class="ph ph-package text-2xl"></i>
+              <span class="text-[10px] font-bold">Products</span>
+          </a>
+          <a href="/cart" class="relative bg-weld-orange text-black w-14 h-14 rounded-full flex items-center justify-center -mt-8 border-4 border-zinc-950 shadow-lg shadow-weld-orange/20 transition-transform active:scale-90">
+              <i class="ph ph-shopping-cart text-2xl font-bold"></i>
+              <span id="mobile-cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] rounded-full h-5 w-5 flex items-center justify-center font-bold border-2 border-zinc-950">0</span>
+          </a>
+          <a href="/about" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
+              <i class="ph ph-info text-2xl"></i>
+              <span class="text-[10px] font-bold">About</span>
+          </a>
+          <button id="mobile-more-btn" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors relative">
+              <i class="ph ph-caret-circle-up text-2xl"></i>
+              <span class="text-[10px] font-bold">More</span>
+          </button>
+          
+          <!-- Dropup Menu -->
+          <div id="mobile-more-menu" class="absolute bottom-full right-4 mb-4 w-48 bg-zinc-900/95 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden hidden animate-fade-in-up z-[60]">
+              <div class="p-2 space-y-1">
+                  <a href="/products" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+                      <i class="ph ph-magnifying-glass text-weld-orange text-lg"></i>
+                      <span class="text-sm font-medium">Search</span>
+                  </a>
+                  <a href="/about" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+                      <i class="ph ph-info text-weld-orange text-lg"></i>
+                      <span class="text-sm font-medium">About</span>
+                  </a>
+                  <a href="/feedback" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+                      <i class="ph ph-chat-centered-dots text-weld-orange text-lg"></i>
+                      <span class="text-sm font-medium">Feedback</span>
+                  </a>
+                  <a href="/contact" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+                      <i class="ph ph-envelope text-weld-orange text-lg"></i>
+                      <span class="text-sm font-medium">Contact</span>
+                  </a>
+              </div>
+          </div>
+      </div>
+
+      <div class="pb-24 md:pb-0">
       <!-- Footer -->
       <footer class="bg-black py-12 border-t border-zinc-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -361,7 +400,8 @@
             </div>
           </div>
         </div>
-      </footer>
+        </div>
+    </footer>
     </div>
     @vite('resources/js/main.js')
   </body>

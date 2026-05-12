@@ -90,14 +90,23 @@ class ShoppingCart {
 
     updateBadge() {
         const badge = document.getElementById('cart-count');
+        const mobileBadge = document.getElementById('mobile-cart-count');
+        const count = this.items.reduce((sum, item) => sum + item.quantity, 0);
+
         if (badge) {
-            const count = this.items.reduce((sum, item) => sum + item.quantity, 0);
             badge.innerText = count;
-            // Add a small bounce animation
             badge.classList.remove('animate-bounce');
-            void badge.offsetWidth; // trigger reflow
+            void badge.offsetWidth; 
             badge.classList.add('animate-bounce');
             setTimeout(() => badge.classList.remove('animate-bounce'), 1000);
+        }
+
+        if (mobileBadge) {
+            mobileBadge.innerText = count;
+            mobileBadge.classList.remove('animate-bounce');
+            void mobileBadge.offsetWidth;
+            mobileBadge.classList.add('animate-bounce');
+            setTimeout(() => mobileBadge.classList.remove('animate-bounce'), 1000);
         }
     }
 

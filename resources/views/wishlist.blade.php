@@ -6,20 +6,6 @@
     <title>My Wishlist - CLASSICWELD</title>
     <link rel="icon" type="image/png" href="/favicon.png" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            colors: {
-              "weld-orange": "#FFCC00",
-              "weld-dark": "#09090b",
-            },
-          },
-        },
-      };
-    </script>
     <style>
       body { visibility: hidden; }
       .glass {
@@ -54,7 +40,7 @@
         50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.1); }
       }
     </style>
-    @vite('resources/js/main.js')
+    @vite(['resources/css/style.css', 'resources/js/main.js'])
     <script>
       window.addEventListener("load", () => {
         document.body.style.visibility = "visible";
@@ -83,24 +69,27 @@
               </div>
             </div>
             <div class="flex items-center space-x-4">
-              <div class="relative group" id="nav-search-container">
+              <div class="relative group hidden md:block" id="nav-search-container">
                 <div class="flex items-center bg-zinc-900/50 border border-white/10 rounded-full px-4 py-1.5 focus-within:border-weld-orange transition-all duration-300">
                   <i class="ph ph-magnifying-glass text-gray-400 mr-2"></i>
                   <input type="text" id="nav-search-input" placeholder="Search..." class="bg-transparent border-none focus:outline-none text-sm w-24 md:w-40 transition-all duration-300 focus:w-40 md:focus:w-64">
                 </div>
                 <div id="nav-search-suggestions" class="absolute top-full left-0 md:left-auto md:right-0 mt-2 w-64 md:w-80 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl overflow-hidden hidden z-50"></div>
               </div>
-              <a href="/cart" class="text-gray-300 hover:text-white transition-colors relative block cursor-pointer">
+              <a href="/cart" class="text-gray-300 hover:text-white transition-colors relative hidden md:block cursor-pointer">
                 <i class="ph ph-shopping-cart text-xl"></i>
                 <span id="cart-count" class="absolute -top-2 -right-2 bg-weld-orange text-xs rounded-full h-4 w-4 flex items-center justify-center text-white font-bold">0</span>
               </a>
-              <a href="/admin/login" class="text-gray-300 hover:text-white transition-colors" title="Admin Login"><i class="ph ph-user text-xl"></i></a><button onclick="toggleTheme()" class="text-gray-300 hover:text-white transition-colors" title="Toggle Theme"><i class="ph ph-sun theme-toggle-icon text-xl"></i></button>
+              <a href="/admin/login" class="text-gray-300 hover:text-white transition-colors hidden md:block" title="Admin Login"><i class="ph ph-user text-xl"></i></a><button onclick="toggleTheme()" class="text-gray-300 hover:text-white transition-colors hidden md:block" title="Toggle Theme"><i class="ph ph-sun theme-toggle-icon text-xl"></i></button>
               
             </div>
-            <div class="-mr-2 flex md:hidden">
-              <button type="button" id="mobile-menu-btn" class="bg-zinc-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-zinc-700 focus:outline-none">
-                <i class="ph ph-list text-2xl"></i>
+            <div class="flex md:hidden items-center space-x-4">
+              <button onclick="toggleTheme()" class="text-gray-400 hover:text-white transition-colors" title="Toggle Theme">
+                <i class="ph ph-sun theme-toggle-icon text-3xl"></i>
               </button>
+              <a href="/admin/login" class="text-gray-400 hover:text-white transition-colors" title="Admin Login">
+                <i class="ph ph-user text-3xl"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -128,13 +117,61 @@
         </div>
       </main>
 
+      <!-- Mobile Fixed Bottom Navigation -->
+      <div class="md:hidden fixed bottom-0 left-0 w-full bg-zinc-950/90 backdrop-blur-xl border-t border-white/5 py-3 px-6 z-50 flex items-center justify-between shadow-2xl">
+          <a href="/" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
+              <i class="ph ph-house text-2xl"></i>
+              <span class="text-[10px] font-bold">Home</span>
+          </a>
+          <a href="/products" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
+              <i class="ph ph-package text-2xl"></i>
+              <span class="text-[10px] font-bold">Products</span>
+          </a>
+          <a href="/cart" class="relative bg-weld-orange text-black w-14 h-14 rounded-full flex items-center justify-center -mt-8 border-4 border-zinc-950 shadow-lg shadow-weld-orange/20 transition-transform active:scale-90">
+              <i class="ph ph-shopping-cart text-2xl font-bold"></i>
+              <span id="mobile-cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] rounded-full h-5 w-5 flex items-center justify-center font-bold border-2 border-zinc-950">0</span>
+          </a>
+          <a href="/about" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
+              <i class="ph ph-info text-2xl"></i>
+              <span class="text-[10px] font-bold">About</span>
+          </a>
+          <button id="mobile-more-btn" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors relative">
+              <i class="ph ph-caret-circle-up text-2xl"></i>
+              <span class="text-[10px] font-bold">More</span>
+          </button>
+          
+          <!-- Dropup Menu -->
+          <div id="mobile-more-menu" class="absolute bottom-full right-4 mb-4 w-48 bg-zinc-900/95 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden hidden animate-fade-in-up z-[60]">
+              <div class="p-2 space-y-1">
+                  <a href="/products" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+                      <i class="ph ph-magnifying-glass text-weld-orange text-lg"></i>
+                      <span class="text-sm font-medium">Search</span>
+                  </a>
+                  <a href="/about" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+                      <i class="ph ph-info text-weld-orange text-lg"></i>
+                      <span class="text-sm font-medium">About</span>
+                  </a>
+                  <a href="/feedback" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+                      <i class="ph ph-chat-centered-dots text-weld-orange text-lg"></i>
+                      <span class="text-sm font-medium">Feedback</span>
+                  </a>
+                  <a href="/contact" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+                      <i class="ph ph-envelope text-weld-orange text-lg"></i>
+                      <span class="text-sm font-medium">Contact</span>
+                  </a>
+              </div>
+          </div>
+      </div>
+
+      <div class="pb-24 md:pb-0">
       <!-- Footer -->
       <footer class="bg-zinc-950 border-t border-white/5 py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <img src="/logo.png" alt="ClassicWeld" class="h-8 mx-auto mb-6 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
           <p class="text-gray-500 text-sm">© 2026 ClassicWeld Trading LLC. All rights reserved.</p>
         </div>
-      </footer>
+        </div>
+    </footer>
     </div>
 
     <script>
