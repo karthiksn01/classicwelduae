@@ -165,7 +165,7 @@
             // Fetch all products (unauthenticated)
             const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
                 ? `http://${window.location.hostname}:8000` 
-                : '/api';
+                : '';
             const response = await fetch(`${BACKEND_URL}/api/products`);
             if (!response.ok) throw new Error('Failed to fetch products');
             

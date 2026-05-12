@@ -266,7 +266,7 @@
                     
                     const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
                         ? `http://${window.location.hostname}:8000/api` 
-                        : '/api/api';
+                        : '/api';
 
                     const response = await fetch(`${API_URL}/quotes`, {
                         method: 'POST',
