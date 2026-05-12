@@ -29,16 +29,16 @@ try {
     Artisan::call('config:clear');
     echo "<p>Config cleared.</p>";
 
-    echo "<p>Creating storage link...</p>";
-    // On some shared hosts, symlink() might be disabled. We try it anyway.
-    try {
-        Artisan::call('storage:link');
-        echo "<p>Storage link created.</p>";
-    } catch (\Exception $e) {
-        echo "<p style='color:orange'>Storage link skipped: " . $e->getMessage() . "</p>";
-    }
+    echo "<p>Clearing view cache (to reflect HTML changes)...</p>";
+    Artisan::call('view:clear');
+    echo "<p>View cache cleared.</p>";
 
-    echo "<h2 style='color:green'>Done! Please DELETE this file (install.php) from your server now.</h2>";
+    echo "<p>Clearing general cache...</p>";
+    Artisan::call('cache:clear');
+    echo "<p>General cache cleared.</p>";
+
+    echo "<h2 style='color:green'>Done! Please Refresh your homepage. If it still doesn't show, click 'Deploy' in Hostinger Git settings.</h2>";
+    echo "<p>Remember to DELETE this file (install.php) from your server when finished.</p>";
 
 } catch (\Exception $e) {
     echo "<h2 style='color:red'>Error during setup:</h2>";
