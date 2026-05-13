@@ -11,7 +11,7 @@
     </style>
     @vite('resources/css/style.css')
     <script>
-      window.addEventListener("load", () => {
+      window.addEventListener("DOMContentLoaded", () => {
         document.body.style.visibility = "visible";
       });
     </script>
@@ -122,24 +122,25 @@
       <!-- Mobile Fixed Bottom Navigation -->
       <div class="md:hidden fixed bottom-0 left-0 w-full bg-zinc-950/90 backdrop-blur-xl border-t border-white/5 py-3 px-6 z-50 flex items-center justify-between shadow-2xl">
           <a href="/" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
-              <i class="ph ph-house text-2xl"></i>
-              <span class="text-[10px] font-bold">Home</span>
+              <i class="ph ph-house text-2xl" style="color: white !important;"></i>
+              <span class="text-[10px] font-bold" style="color: white !important;">Home</span>
           </a>
           <a href="/products" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
-              <i class="ph ph-package text-2xl"></i>
-              <span class="text-[10px] font-bold">Products</span>
+              <i class="ph ph-package text-2xl" style="color: white !important;"></i>
+              <span class="text-[10px] font-bold" style="color: white !important;">Products</span>
           </a>
           <a href="/cart" class="relative bg-weld-orange text-black w-14 h-14 rounded-full flex items-center justify-center -mt-8 border-4 border-zinc-950 shadow-lg shadow-weld-orange/20 transition-transform active:scale-90">
               <i class="ph ph-shopping-cart text-2xl font-bold"></i>
               <span id="mobile-cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] rounded-full h-5 w-5 flex items-center justify-center font-bold border-2 border-zinc-950">0</span>
           </a>
           <a href="/about" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
-              <i class="ph ph-info text-2xl"></i>
-              <span class="text-[10px] font-bold">About</span>
+              <i class="ph ph-info text-2xl" style="color: white !important;"></i>
+              <span class="text-[10px] font-bold" style="color: white !important;">About</span>
           </a>
           <button id="mobile-more-btn" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors relative">
-              <i class="ph ph-caret-circle-up text-2xl"></i>
-              <span class="text-[10px] font-bold">More</span>
+
+              <i class="ph ph-caret-circle-up text-2xl" style="color: white !important;"></i>
+              <span class="text-[10px] font-bold" style="color: white !important;">More</span>
           </button>
           
           <!-- Dropup Menu -->
@@ -147,19 +148,20 @@
               <div class="p-2 space-y-1">
                   <a href="/products" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
                       <i class="ph ph-magnifying-glass text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">Search</span>
+                      <span class="text-sm font-medium" style="color: white !important;">Search</span>
                   </a>
-                  <a href="/about" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
-                      <i class="ph ph-info text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">About</span>
-                  </a>
-                  <a href="/feedback" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+
+                  <a href="/feedback" id="mobile-feedback-link" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
                       <i class="ph ph-chat-centered-dots text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">Feedback</span>
+                      <span class="text-sm font-medium" style="color: white !important;">Feedback</span>
+                  </a>
+                  <a href="https://g.page/r/CdS2YysBt4TjEBM/review" target="_blank" id="mobile-google-review-link" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+                      <i class="ph ph-google-logo text-weld-orange text-lg"></i>
+                      <span class="text-sm font-medium font-bold" style="color: white !important;">Write a Review</span>
                   </a>
                   <a href="/contact" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
                       <i class="ph ph-envelope text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">Contact</span>
+                      <span class="text-sm font-medium" style="color: white !important;">Contact</span>
                   </a>
               </div>
           </div>
@@ -246,26 +248,34 @@
             }
             
             container.innerHTML = items.map(item => `
-                <div class="glass rounded-xl p-4 flex items-center gap-6 border border-white/5 animate-fade-in">
-                    <div class="w-24 h-24 rounded-lg overflow-hidden bg-zinc-800 flex-shrink-0">
-                        <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+                <div class="glass rounded-xl p-3 md:p-4 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 border border-white/5 animate-fade-in relative">
+                    <!-- Product Info Area -->
+                    <div class="flex items-center gap-4 w-full md:flex-1">
+                        <div class="w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden bg-zinc-800 flex-shrink-0 border border-white/5">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="font-bold text-sm md:text-lg mb-1 line-clamp-2 md:line-clamp-none leading-tight text-white">${item.name}</h3>
+                            <p class="text-gray-500 text-[10px] md:text-sm uppercase tracking-wider font-medium">Industrial Grade</p>
+                        </div>
                     </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-lg mb-1">${item.name}</h3>
-                        <p class="text-gray-500 text-sm">Industrial Grade</p>
-                    </div>
-                    <div class="flex items-center gap-3 bg-zinc-900 rounded-lg p-1 border border-zinc-800">
-                        <button onclick="window.Cart.updateQuantity(${item.id}, -1)" class="w-8 h-8 rounded hover:bg-zinc-700 flex items-center justify-center text-gray-400 hover:text-white transition-colors">
-                            <i class="ph-bold ph-minus"></i>
+                    
+                    <!-- Controls Area -->
+                    <div class="flex items-center justify-between w-full md:w-auto md:ml-auto gap-4 pt-3 md:pt-0 border-t md:border-t-0 border-white/5">
+                        <div class="flex items-center gap-2 bg-black/40 rounded-xl p-1 border border-white/10 shadow-inner">
+                            <button onclick="window.Cart.updateQuantity(${item.id}, -1)" class="w-8 h-8 rounded-lg hover:bg-zinc-800 flex items-center justify-center text-gray-400 hover:text-white transition-all active:scale-90">
+                                <i class="ph-bold ph-minus text-xs"></i>
+                            </button>
+                            <span class="w-8 text-center font-bold text-sm text-weld-orange">${item.quantity}</span>
+                            <button onclick="window.Cart.updateQuantity(${item.id}, 1)" class="w-8 h-8 rounded-lg hover:bg-zinc-800 flex items-center justify-center text-gray-400 hover:text-white transition-all active:scale-90">
+                                <i class="ph-bold ph-plus text-xs"></i>
+                            </button>
+                        </div>
+                        
+                        <button onclick="window.Cart.remove(${item.id})" class="text-gray-500 hover:text-red-500 hover:bg-red-500/10 transition-all p-2.5 rounded-xl border border-transparent hover:border-red-500/20" title="Remove item">
+                            <i class="ph-bold ph-trash text-lg md:text-xl"></i>
                         </button>
-                        <span class="w-6 text-center font-medium">${item.quantity}</span>
-                        <button onclick="window.Cart.updateQuantity(${item.id}, 1)" class="w-8 h-8 rounded hover:bg-zinc-700 flex items-center justify-center text-gray-400 hover:text-white transition-colors">
-                            <i class="ph-bold ph-plus"></i>
-                        </button>
                     </div>
-                    <button onclick="window.Cart.remove(${item.id})" class="text-gray-500 hover:text-red-500 transition-colors p-2">
-                        <i class="ph-bold ph-trash text-xl"></i>
-                    </button>
                 </div>
             `).join('');
             
@@ -282,7 +292,8 @@
             const userEmail = localStorage.getItem('user_email');
             const userPhone = localStorage.getItem('user_phone');
             if(userName) document.getElementById('cust-name').value = userName;
-            if(userEmail) document.getElementById('cust-email').value = userEmail;
+            // Removed auto-fill for email to prevent fixed admin email from appearing
+            // if(userEmail) document.getElementById('cust-email').value = userEmail;
             if(userPhone) document.getElementById('cust-phone').value = userPhone;
 
             document.getElementById('checkout-btn')?.addEventListener('click', async () => {
@@ -325,8 +336,11 @@
                         })
                     });
 
-                    // Prepare Mailto Link
-                    const businessEmail = "karthiksn2004@gmail.com";
+                    // Business emails (Primary and Forwarding)
+                    const primaryEmail = "classicwelduae@gmail.com";
+                    const forwardingEmail = "karthiksn2004@gmail.com"; // You can change this to your second email
+                    const businessEmails = `${primaryEmail},${forwardingEmail}`;
+                    
                     const subject = encodeURIComponent(`Product Quote Request - ${name}`);
                     
                     let bodyText = `New Product Quote Request from ClassicWeld\n`;
@@ -344,7 +358,7 @@
                     bodyText += `\n-------------------------------------------\n`;
                     bodyText += `Sent via ClassicWeld Portal\n`;
                     
-                    const mailtoLink = `mailto:${businessEmail}?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
+                    const mailtoLink = `mailto:${businessEmails}?subject=${subject}&body=${encodeURIComponent(bodyText)}`;
 
                     // Redirect to Email Client
                     window.location.href = mailtoLink;

@@ -67,7 +67,7 @@ class MessageController extends Controller
 
         // Send Email
         try {
-            \Illuminate\Support\Facades\Mail::to('karthiksn2004@gmail.com')->send(new \App\Mail\QuoteRequestMail($items, $customerInfo));
+            \Illuminate\Support\Facades\Mail::to(['classicwelduae@gmail.com', 'santhoshmangadan@gmail.com'])->send(new \App\Mail\QuoteRequestMail($items, $customerInfo));
         } catch (\Exception $e) {
             \Illuminate\Support\Facades\Log::error('Mail sending failed: ' . $e->getMessage());
             // We still return success because it's saved in DB

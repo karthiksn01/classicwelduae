@@ -27,7 +27,10 @@
     0% { opacity: 0; }
     100% { opacity: 1; }
   }
+
 }
+
+
 
 :root {
   --bg-dark: #09090b;
@@ -80,6 +83,49 @@
   background-color: var(--bg-dark);
 }
 
+/* Force white text in dark sections even in light mode */
+:root.light .bg-black,
+:root.light .bg-zinc-900,
+:root.light .bg-zinc-950,
+:root.light .bg-zinc-950\/90,
+:root.light .bg-weld-dark,
+:root.light footer,
+:root.light nav.bg-black\/80,
+:root.light #mobile-more-menu,
+:root.light [class*="fixed bottom-0"] {
+  color: #ffffff !important;
+}
+
+/* Aggressive white text force for mobile nav */
+:root.light #mobile-more-menu *,
+:root.light [class*="fixed bottom-0"] * {
+  color: #ffffff !important;
+}
+
+/* Muted text in footer stays readable */
+:root.light footer p,
+:root.light footer a {
+  color: #a1a1aa !important;
+}
+
+:root.light footer a:hover {
+  color: #FFCC00 !important;
+}
+
+:root.light footer h5,
+:root.light footer h4 {
+  color: #ffffff !important;
+}
+
+:root.light footer a:hover {
+  color: #FFCC00 !important;
+}
+
+:root.light footer h5,
+:root.light footer h4 {
+  color: #ffffff !important;
+}
+
 
 /* Gold Button Gradient */
 .bg-weld-orange { 
@@ -92,6 +138,23 @@
   background: linear-gradient(135deg, #FFD700 0%, #CC9900 100%) !important;
   transform: translateY(-1px);
   box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+}
+
+/* Theme Adaptive Inputs */
+.theme-input {
+  background-color: var(--bg-black) !important;
+  color: var(--text-main) !important;
+  border-color: var(--glass-border) !important;
+}
+
+.theme-input::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+}
+
+.theme-card {
+  background-color: var(--bg-zinc) !important;
+  border-color: var(--glass-border) !important;
 }
 
 body {
@@ -294,3 +357,5 @@ body {
 .font-script {
   font-family: 'Moon Dance', cursive !important;
 }
+
+

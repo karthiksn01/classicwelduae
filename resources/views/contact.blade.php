@@ -18,7 +18,7 @@
     </style>
     @vite('resources/css/style.css')
     <script>
-      window.addEventListener("load", () => {
+      window.addEventListener("DOMContentLoaded", () => {
         document.body.style.visibility = "visible";
       });
     </script>
@@ -95,8 +95,8 @@
                     <i class="ph ph-map-pin text-xl md:text-2xl"></i>
                   </div>
                   <div>
-                    <h4 class="font-bold text-white text-base md:text-lg">Head Office – Dubai, UAE</h4>
-                    <p class="text-gray-500 text-sm md:text-base">Office No. 18-275, Ahmed Qasim Darwish Fakhr Building<br>Al Khabaisi, Dubai, UAE</p>
+                    <h4 class="font-bold text-white text-base md:text-lg">Dubai Office</h4>
+                    <p class="text-gray-500 text-sm md:text-base leading-relaxed">Arab bank Building., office no.2<br>Baniyas road,<br>Deira, Dubai</p>
                   </div>
                 </div>
                 
@@ -104,19 +104,44 @@
                   <div class="bg-zinc-800 p-3 md:p-4 rounded-xl mr-5 md:mr-6 text-weld-orange shadow-lg">
                     <i class="ph ph-phone text-xl md:text-2xl"></i>
                   </div>
-                  <div>
-                    <h4 class="font-bold text-white text-base md:text-lg">Contact</h4>
-                    <p class="text-gray-500 text-sm md:text-base">+971 50 208 4049</p>
-                    <p class="text-[10px] md:text-xs text-gray-600 mt-1 uppercase tracking-wider">Available Mon–Sat | Business Hours</p>
+                  <div class="flex-grow">
+                    <h4 class="font-bold text-white text-base md:text-lg mb-4">Contact Details</h4>
+                    <div class="space-y-3">
+                      <!-- Santhosh -->
+                      <div class="flex items-center justify-between bg-zinc-900/40 p-3 rounded-xl border border-white/5 group hover:border-weld-orange/30 transition-all">
+                        <div>
+                          <p class="text-white font-semibold text-sm md:text-base">+971 56 59 56 200</p>
+                          <p class="text-gray-500 text-[10px] md:text-xs uppercase tracking-widest mt-0.5">Santhosh G mangandan</p>
+                        </div>
+                        <a href="tel:+971565956200" class="bg-weld-orange/10 group-hover:bg-weld-orange text-weld-orange group-hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-all shadow-sm">
+                          <i class="ph ph-phone-call text-lg"></i>
+                        </a>
+                      </div>
+                      <!-- Salim -->
+                      <div class="flex items-center justify-between bg-zinc-900/40 p-3 rounded-xl border border-white/5 group hover:border-weld-orange/30 transition-all">
+                        <div>
+                          <p class="text-white font-semibold text-sm md:text-base">+971 50 20 84 049</p>
+                          <p class="text-gray-500 text-[10px] md:text-xs uppercase tracking-widest mt-0.5">salim Khan</p>
+                        </div>
+                        <a href="tel:+971502084049" class="bg-weld-orange/10 group-hover:bg-weld-orange text-weld-orange group-hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-all shadow-sm">
+                          <i class="ph ph-phone-call text-lg"></i>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="flex items-start">
                   <div class="bg-zinc-800 p-3 md:p-4 rounded-xl mr-5 md:mr-6 text-weld-orange shadow-lg">
                     <i class="ph ph-envelope text-xl md:text-2xl"></i>
                   </div>
-                  <div>
-                    <h4 class="font-bold text-white text-base md:text-lg">Sales & Inquiries</h4>
-                    <p class="text-gray-500 text-sm md:text-base">classicwelduae@gmail.com</p>
+                  <div class="flex-grow">
+                    <h4 class="font-bold text-white text-base md:text-lg mb-4">Sales & Inquiries</h4>
+                    <div class="flex items-center justify-between bg-zinc-900/40 p-3 rounded-xl border border-white/5 group hover:border-weld-orange/30 transition-all">
+                      <p class="text-gray-500 text-sm md:text-base font-medium">classicwelduae@gmail.com</p>
+                      <a href="mailto:classicwelduae@gmail.com" class="bg-weld-orange/10 group-hover:bg-weld-orange text-weld-orange group-hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-all shadow-sm">
+                        <i class="ph ph-envelope-simple text-lg"></i>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -171,24 +196,25 @@
       <!-- Mobile Fixed Bottom Navigation -->
       <div class="md:hidden fixed bottom-0 left-0 w-full bg-zinc-950/90 backdrop-blur-xl border-t border-white/5 py-3 px-6 z-50 flex items-center justify-between shadow-2xl">
           <a href="/" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
-              <i class="ph ph-house text-2xl"></i>
-              <span class="text-[10px] font-bold">Home</span>
+              <i class="ph ph-house text-2xl" style="color: white !important;"></i>
+              <span class="text-[10px] font-bold" style="color: white !important;">Home</span>
           </a>
           <a href="/products" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
-              <i class="ph ph-package text-2xl"></i>
-              <span class="text-[10px] font-bold">Products</span>
+              <i class="ph ph-package text-2xl" style="color: white !important;"></i>
+              <span class="text-[10px] font-bold" style="color: white !important;">Products</span>
           </a>
           <a href="/cart" class="relative bg-weld-orange text-black w-14 h-14 rounded-full flex items-center justify-center -mt-8 border-4 border-zinc-950 shadow-lg shadow-weld-orange/20 transition-transform active:scale-90">
               <i class="ph ph-shopping-cart text-2xl font-bold"></i>
               <span id="mobile-cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] rounded-full h-5 w-5 flex items-center justify-center font-bold border-2 border-zinc-950">0</span>
           </a>
           <a href="/about" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
-              <i class="ph ph-info text-2xl"></i>
-              <span class="text-[10px] font-bold">About</span>
+              <i class="ph ph-info text-2xl" style="color: white !important;"></i>
+              <span class="text-[10px] font-bold" style="color: white !important;">About</span>
           </a>
           <button id="mobile-more-btn" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors relative">
-              <i class="ph ph-caret-circle-up text-2xl"></i>
-              <span class="text-[10px] font-bold">More</span>
+
+              <i class="ph ph-caret-circle-up text-2xl" style="color: white !important;"></i>
+              <span class="text-[10px] font-bold" style="color: white !important;">More</span>
           </button>
           
           <!-- Dropup Menu -->
@@ -196,19 +222,20 @@
               <div class="p-2 space-y-1">
                   <a href="/products" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
                       <i class="ph ph-magnifying-glass text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">Search</span>
+                      <span class="text-sm font-medium" style="color: white !important;">Search</span>
                   </a>
-                  <a href="/about" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
-                      <i class="ph ph-info text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">About</span>
-                  </a>
-                  <a href="/feedback" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+
+                  <a href="/feedback" id="mobile-feedback-link" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
                       <i class="ph ph-chat-centered-dots text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">Feedback</span>
+                      <span class="text-sm font-medium" style="color: white !important;">Feedback</span>
+                  </a>
+                  <a href="https://g.page/r/CdS2YysBt4TjEBM/review" target="_blank" id="mobile-google-review-link" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
+                      <i class="ph ph-google-logo text-weld-orange text-lg"></i>
+                      <span class="text-sm font-medium font-bold" style="color: white !important;">Write a Review</span>
                   </a>
                   <a href="/contact" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
                       <i class="ph ph-envelope text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">Contact</span>
+                      <span class="text-sm font-medium" style="color: white !important;">Contact</span>
                   </a>
               </div>
           </div>

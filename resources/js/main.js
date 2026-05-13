@@ -686,7 +686,7 @@ async function fetchCategoriesAndRender() {
             
             categories.forEach(cat => {
                 categoryFilterList.innerHTML += `<li><a href="#" class="text-gray-400 hover:text-white transition-colors flex justify-between items-center text-sm category-link" data-category="${cat.name}">${cat.name}</a></li>`;
-                mobileHtml += `<button class="category-link flex-shrink-0 px-6 py-2 rounded-full bg-zinc-900 text-gray-400 font-bold text-xs transition-all border border-white/5 whitespace-nowrap" data-category="${cat.name}">${cat.name}</button>`;
+                mobileHtml += `<button class="category-link flex-shrink-0 px-6 py-2 rounded-full theme-input text-gray-400 font-bold text-xs transition-all border border-white/5 whitespace-nowrap" data-category="${cat.name}">${cat.name}</button>`;
             });
             
             if (mobileCategoryScroll) mobileCategoryScroll.innerHTML = mobileHtml;
@@ -713,8 +713,8 @@ function bindCategoryEvents() {
                 
                 // Update Mobile Active Styles
                 document.querySelectorAll('#mobile-category-scroll .category-link').forEach(l => {
+                    l.classList.add('theme-input', 'text-gray-400', 'border-white/5');
                     l.classList.remove('bg-weld-orange', 'text-white', 'border-weld-orange', 'shadow-lg', 'shadow-weld-orange/20');
-                    l.classList.add('bg-zinc-900', 'text-gray-400', 'border-white/5');
                 });
 
                 // Apply Active to matching items across both
@@ -724,7 +724,7 @@ function bindCategoryEvents() {
                         activeEl.classList.remove('text-gray-400');
                     } else {
                         activeEl.classList.add('bg-weld-orange', 'text-white', 'border-weld-orange', 'shadow-lg', 'shadow-weld-orange/20');
-                        activeEl.classList.remove('bg-zinc-900', 'text-gray-400', 'border-white/5');
+                        activeEl.classList.remove('theme-input', 'text-gray-400', 'border-white/5');
                     }
                 });
 
@@ -814,6 +814,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
     initMobileMore();
+
 });
 
 // --- COOKIE CONSENT ---

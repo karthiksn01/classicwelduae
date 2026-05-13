@@ -117,10 +117,10 @@
             <div class="relative flex-1">
               <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
               <input type="text" id="mobile-search-input-alt" placeholder="Search..."
-                class="w-full bg-black/40 border border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-white text-xs focus:outline-none focus:border-weld-orange">
+                class="w-full theme-input border border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:border-weld-orange">
             </div>
             <select id="mobile-sort-select"
-              class="bg-black/40 border border-white/10 rounded-lg px-2 py-1.5 text-white text-[10px] focus:outline-none focus:border-weld-orange cursor-pointer">
+              class="theme-input border border-white/10 rounded-lg px-2 py-1.5 text-[10px] focus:outline-none focus:border-weld-orange cursor-pointer">
               <option value="newest">Newest</option>
               <option value="popular">Popular</option>
             </select>
@@ -157,12 +157,12 @@
               <div class="relative w-full md:w-64">
                 <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                 <input type="text" id="search-input" placeholder="Search products..."
-                  class="w-full bg-black/40 border border-white/10 rounded-lg pl-10 pr-4 py-2 text-white text-sm focus:outline-none focus:border-weld-orange">
+                  class="w-full theme-input border border-white/10 rounded-lg pl-10 pr-4 py-2 text-sm focus:outline-none focus:border-weld-orange">
               </div>
               <div class="flex items-center justify-between w-full md:w-auto gap-2 text-sm text-gray-400">
                 <span class="whitespace-nowrap">Sort by:</span>
                 <select id="sort-select"
-                  class="bg-black/40 border border-white/10 rounded-lg px-3 py-2 text-white text-xs md:text-sm focus:outline-none focus:border-weld-orange cursor-pointer flex-1 md:flex-none">
+                  class="theme-input border border-white/10 rounded-lg px-3 py-2 text-xs md:text-sm focus:outline-none focus:border-weld-orange cursor-pointer flex-1 md:flex-none">
                   <option value="newest">Newest Arrivals</option>
                   <option value="popular">Most Popular</option>
                 </select>
@@ -191,14 +191,14 @@
     <!-- Mobile Fixed Bottom Navigation -->
     <div
       class="md:hidden fixed bottom-0 left-0 w-full bg-zinc-950/90 backdrop-blur-xl border-t border-white/5 py-3 px-6 z-50 flex items-center justify-between shadow-2xl">
-      <a href="/" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
-        <i class="ph ph-house text-2xl"></i>
-        <span class="text-[10px] font-bold">Home</span>
-      </a>
+        <a href="/" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
+          <i class="ph ph-house text-2xl" style="color: white !important;"></i>
+          <span class="text-[10px] font-bold" style="color: white !important;">Home</span>
+        </a>
       <a href="/products"
         class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
-        <i class="ph ph-package text-2xl"></i>
-        <span class="text-[10px] font-bold">Products</span>
+        <i class="ph ph-package text-2xl" style="color: white !important;"></i>
+        <span class="text-[10px] font-bold" style="color: white !important;">Products</span>
       </a>
       <a href="/cart"
         class="relative bg-weld-orange text-black w-14 h-14 rounded-full flex items-center justify-center -mt-8 border-4 border-zinc-950 shadow-lg shadow-weld-orange/20 transition-transform active:scale-90">
@@ -207,12 +207,12 @@
           class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] rounded-full h-5 w-5 flex items-center justify-center font-bold border-2 border-zinc-950">0</span>
       </a>
           <a href="/about" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors">
-              <i class="ph ph-info text-2xl"></i>
-              <span class="text-[10px] font-bold">About</span>
+              <i class="ph ph-info text-2xl" style="color: white !important;"></i>
+              <span class="text-[10px] font-bold" style="color: white !important;">About</span>
           </a>
           <button id="mobile-more-btn" class="flex flex-col items-center gap-1 text-gray-400 hover:text-weld-orange transition-colors relative">
-              <i class="ph ph-caret-circle-up text-2xl"></i>
-              <span class="text-[10px] font-bold">More</span>
+              <i class="ph ph-caret-circle-up text-2xl" style="color: white !important;"></i>
+              <span class="text-[10px] font-bold" style="color: white !important;">More</span>
           </button>
           
           <!-- Dropup Menu -->
@@ -220,19 +220,16 @@
               <div class="p-2 space-y-1">
                   <a href="/products" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
                       <i class="ph ph-magnifying-glass text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">Search</span>
+                      <span class="text-sm font-medium" style="color: white !important;">Search</span>
                   </a>
-                  <a href="/about" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
-                      <i class="ph ph-info text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">About</span>
-                  </a>
+
                   <a href="/feedback" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
                       <i class="ph ph-chat-centered-dots text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">Feedback</span>
+                      <span class="text-sm font-medium" style="color: white !important;">Feedback</span>
                   </a>
                   <a href="/contact" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-zinc-800 transition-colors">
                       <i class="ph ph-envelope text-weld-orange text-lg"></i>
-                      <span class="text-sm font-medium">Contact</span>
+                      <span class="text-sm font-medium" style="color: white !important;">Contact</span>
                   </a>
               </div>
           </div>
