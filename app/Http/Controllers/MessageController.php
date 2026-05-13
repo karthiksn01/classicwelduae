@@ -22,6 +22,23 @@ class MessageController extends Controller
         $message = Message::create($request->all());
         \Illuminate\Support\Facades\Log::info('Message saved with ID: ' . $message->id);
 
+        // Forward General Message (Contact/Feedback) via Email
+        try {
+            $adminEmails = ['classicwelduae@gmail.com', 'santhoshmangadan@gmail.com'];
+            $subject = 'New ' . ucfirst($request->type ?? 'Message') . ' from ' . $request->name;
+            
+            \Illuminate\Support\Facades\Mail::raw("You have a new message from your website:\n\n" . 
+                "Name: {$request->name}\n" .
+                "Email: {$request->email}\n" .
+                "Type: " . ($request->type ?? 'General') . "\n" .
+                "Rating: " . ($request->rating ?? 'N/A') . "\n\n" .
+                "Message:\n{$request->message}", function($msg) use ($adminEmails, $subject) {
+                    $msg->to($adminEmails)->subject($subject);
+                });
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Forwarding email failed: ' . $e->getMessage());
+        }
+
         return response()->json([
             'message' => 'Message sent successfully!',
             'data' => $message

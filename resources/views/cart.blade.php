@@ -338,7 +338,7 @@
 
                     // Business emails (Primary and Forwarding)
                     const primaryEmail = "classicwelduae@gmail.com";
-                    const forwardingEmail = "karthiksn2004@gmail.com"; // You can change this to your second email
+                    const forwardingEmail = "santhoshmangadan@gmail.com"; // Updated forwarding email
                     const businessEmails = `${primaryEmail},${forwardingEmail}`;
                     
                     const subject = encodeURIComponent(`Product Quote Request - ${name}`);

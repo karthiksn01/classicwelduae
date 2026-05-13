@@ -208,47 +208,49 @@
                                 <span class="text-sm font-bold text-weld-orange uppercase tracking-widest">${brand}</span>
                                 <div class="flex items-center text-yellow-500 gap-1"><i class="ph-fill ph-star"></i> ${rating} (124 reviews)</div>
                             </div>
-                            <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">${product.name}</h1>
+                            <h1 class="text-2xl md:text-5xl font-bold mb-6 leading-tight text-white">${product.name}</h1>
                             
                             ${isDealer ? `
-                            <div class="mb-8 p-6 bg-zinc-900/50 rounded-xl border border-white/5">
-                                <div class="text-sm text-weld-orange flex items-center gap-2"><i class="ph-fill ph-info"></i> Minimum Order Quantity: ${product.moq} Units</div>
+                            <div class="mb-8 p-4 bg-zinc-900/50 rounded-xl border border-white/5">
+                                <div class="text-xs text-weld-orange flex items-center gap-2"><i class="ph-fill ph-info"></i> Minimum Order Quantity: ${product.moq} Units</div>
                             </div>` : ""}
 
-                            <p class="text-gray-400 text-lg mb-8 leading-relaxed">${product.short_description || 'High quality industrial equipment built to perform under the toughest conditions. Engineered for precision and safety.'}</p>
+                            <p class="text-gray-400 text-sm md:text-lg mb-8 leading-relaxed">${product.short_description || 'High quality industrial equipment built to perform under the toughest conditions.'}</p>
 
-                            <div class="flex flex-col sm:flex-row gap-4 mb-8">
-                                <div class="flex items-center border border-white/10 rounded-lg overflow-hidden bg-zinc-900 w-full sm:w-32">
-                                    <button onclick="updateQty(-1)" class="px-4 py-3 text-gray-400 hover:text-white hover:bg-zinc-800 transition-colors">-</button>
-                                    <input type="number" id="product-qty" value="1" min="1" class="w-full bg-transparent text-center font-bold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                    <button onclick="updateQty(1)" class="px-4 py-3 text-gray-400 hover:text-white hover:bg-zinc-800 transition-colors">+</button>
+                            <div class="flex flex-col gap-4 mb-8">
+                                <div class="flex items-center gap-4">
+                                    <div class="flex items-center border border-white/10 rounded-lg overflow-hidden bg-zinc-900 w-32 shrink-0">
+                                        <button onclick="updateQty(-1)" class="px-4 py-3 text-gray-400 hover:text-white hover:bg-zinc-800 transition-colors">-</button>
+                                        <input type="number" id="product-qty" value="1" min="1" class="w-full bg-transparent text-center font-bold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                        <button onclick="updateQty(1)" class="px-4 py-3 text-gray-400 hover:text-white hover:bg-zinc-800 transition-colors">+</button>
+                                    </div>
+                                    <button onclick="window.toggleWishlist(${product.id}, event)" 
+                                            data-wishlist-id="${product.id}"
+                                            class="flex-1 h-12 md:h-14 rounded-lg border border-white/10 bg-zinc-900 hover:bg-zinc-800 transition-all flex items-center justify-center group/wishlist"
+                                            title="Add to Wishlist">
+                                        <i class="${window.userWishlist.includes(product.id) ? 'ph-fill ph-heart text-red-500' : 'ph ph-heart text-white'} text-2xl group-hover/wishlist:scale-110 transition-transform"></i>
+                                    </button>
                                 </div>
-                                <button onclick="handleAddToCart()" data-product-id="${product.id}" class="add-to-cart-btn flex-1 bg-weld-orange hover:bg-amber-600 text-white font-bold py-4 rounded-lg transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-lg">
+                                <button onclick="handleAddToCart()" data-product-id="${product.id}" class="add-to-cart-btn w-full bg-weld-orange hover:bg-amber-600 text-white font-bold py-4 rounded-lg transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-lg">
                                     <i class="ph-bold ph-shopping-cart text-xl"></i> Add to Cart
-                                </button>
-                                <button onclick="window.toggleWishlist(${product.id}, event)" 
-                                        data-wishlist-id="${product.id}"
-                                        class="w-14 h-14 rounded-lg border border-white/10 bg-zinc-900 hover:bg-zinc-800 transition-all flex items-center justify-center group/wishlist"
-                                        title="Add to Wishlist">
-                                    <i class="${window.userWishlist.includes(product.id) ? 'ph-fill ph-heart text-red-500' : 'ph ph-heart text-white'} text-2xl group-hover/wishlist:scale-110 transition-transform"></i>
                                 </button>
                             </div>
 
-                            <div class="grid grid-cols-2 gap-4 text-sm text-gray-400 border-t border-white/5 pt-8">
-                                <div class="flex items-center gap-2"><i class="ph ph-truck text-xl text-weld-orange"></i> Free Shipping</div>
-                                <div class="flex items-center gap-2"><i class="ph ph-shield-check text-xl text-weld-orange"></i> ${product.warranty_years || 1} Year Warranty</div>
-                                <div class="flex items-center gap-2"><i class="ph ph-arrow-u-up-left text-xl text-weld-orange"></i> 30-Day Returns</div>
-                                <div class="flex items-center gap-2"><i class="ph ph-headset text-xl text-weld-orange"></i> 24/7 Support</div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-400 border-t border-white/5 pt-8">
+                                <div class="flex items-center gap-3"><i class="ph ph-truck text-xl text-weld-orange"></i> Free Shipping</div>
+                                <div class="flex items-center gap-3"><i class="ph ph-shield-check text-xl text-weld-orange"></i> ${product.warranty_years || 1} Year Warranty</div>
+                                <div class="flex items-center gap-3"><i class="ph ph-arrow-u-up-left text-xl text-weld-orange"></i> 30-Day Returns</div>
+                                <div class="flex items-center gap-3"><i class="ph ph-headset text-xl text-weld-orange"></i> 24/7 Support</div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Tabs: Description / Features / Specs -->
-                    <div class="glass rounded-2xl p-8 mb-16 border border-white/5">
-                        <div class="flex space-x-8 border-b border-white/10 mb-8 pb-4">
-                            <button onclick="switchTab('description')" id="tab-btn-description" class="tab-btn text-weld-orange font-bold text-lg border-b-2 border-weld-orange pb-4 -mb-[17px] transition-colors">Description</button>
-                            <button onclick="switchTab('features')" id="tab-btn-features" class="tab-btn text-gray-400 hover:text-white font-medium text-lg pb-4 -mb-[17px] transition-colors border-b-2 border-transparent hover:border-white/20">Features</button>
-                            <button onclick="switchTab('specifications')" id="tab-btn-specifications" class="tab-btn text-gray-400 hover:text-white font-medium text-lg pb-4 -mb-[17px] transition-colors border-b-2 border-transparent hover:border-white/20">Specifications</button>
+                    <div class="glass rounded-2xl p-5 md:p-8 mb-16 border border-white/5 overflow-hidden">
+                        <div class="flex space-x-6 md:space-x-8 border-b border-white/10 mb-8 overflow-x-auto no-scrollbar pb-1">
+                            <button onclick="switchTab('description')" id="tab-btn-description" class="tab-btn text-weld-orange font-bold text-sm md:text-lg border-b-2 border-weld-orange pb-4 -mb-[2px] transition-all whitespace-nowrap">Description</button>
+                            <button onclick="switchTab('features')" id="tab-btn-features" class="tab-btn text-gray-400 hover:text-white font-medium text-sm md:text-lg pb-4 -mb-[2px] transition-all border-b-2 border-transparent hover:border-white/20 whitespace-nowrap">Features</button>
+                            <button onclick="switchTab('specifications')" id="tab-btn-specifications" class="tab-btn text-gray-400 hover:text-white font-medium text-sm md:text-lg pb-4 -mb-[2px] transition-all border-b-2 border-transparent hover:border-white/20 whitespace-nowrap">Specifications</button>
                         </div>
                         
                         <div id="tab-content-description" class="tab-content prose prose-invert max-w-none text-gray-400">
