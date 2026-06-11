@@ -60,6 +60,14 @@ class ProductUpdaterController extends Controller
 
         $data = $request->except(['image_file', 'features', 'specifications']);
         
+        // Sync category name string from category_id
+        if (!empty($data['category_id'])) {
+            $category = Category::find($data['category_id']);
+            if ($category) {
+                $data['category'] = $category->name;
+            }
+        }
+        
         // Ensure default values if empty string passed
         if (empty($data['moq'])) $data['moq'] = 1;
         if (empty($data['stock'])) $data['stock'] = 0;
@@ -105,6 +113,18 @@ class ProductUpdaterController extends Controller
         $product = Product::findOrFail($id);
         
         $data = $request->except(['image_file', 'features', 'specifications', '_method']);
+        
+        // Sync category name string from category_id
+        if (isset($data['category_id'])) {
+            if (!empty($data['category_id'])) {
+                $category = Category::find($data['category_id']);
+                if ($category) {
+                    $data['category'] = $category->name;
+                }
+            } else {
+                $data['category'] = null;
+            }
+        }
         
         // Ensure default values if empty string passed
         if (isset($data['moq']) && $data['moq'] === null) $data['moq'] = 1;

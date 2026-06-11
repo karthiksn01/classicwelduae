@@ -12,7 +12,13 @@ class ProductController extends Controller
 
         // Filters
         if ($request->filled('category') && $request->category !== 'All') {
-            $query->where('category', $request->category);
+            $categoryName = $request->category;
+            $query->where(function($q) use ($categoryName) {
+                $q->whereRaw('LOWER(category) = ?', [strtolower($categoryName)])
+                  ->orWhereHas('productCategory', function($q2) use ($categoryName) {
+                      $q2->whereRaw('LOWER(name) = ?', [strtolower($categoryName)]);
+                  });
+            });
         }
         if ($request->has('search') && $request->search !== '') {
             $query->where('name', 'like', '%' . $request->search . '%');
