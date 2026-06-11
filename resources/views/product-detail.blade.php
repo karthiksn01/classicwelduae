@@ -274,7 +274,7 @@
                         <div id="tab-content-specifications" class="tab-content hidden prose prose-invert max-w-none text-gray-400">
                             <div class="bg-zinc-900/50 rounded-lg overflow-hidden">
                                 <table class="w-full text-left">
-                                    <tr class="border-b border-white/5"><th class="p-4 text-white font-medium w-1/3">Category</th><td class="p-4">${product.category}</td></tr>
+                                    <tr class="border-b border-white/5"><th class="p-4 text-white font-medium w-1/3">Category</th><td class="p-4 uppercase">${product.category}</td></tr>
                                     <tr class="border-b border-white/5"><th class="p-4 text-white font-medium">Brand</th><td class="p-4">${brand}</td></tr>
                                     <tr class="border-b border-white/5"><th class="p-4 text-white font-medium">Stock Status</th><td class="p-4">${!product.is_sold_out ? '<span class="text-green-500">In Stock</span>' : '<span class="text-red-500">Out of Stock</span>'}</td></tr>
                                     ${(() => {
@@ -372,7 +372,7 @@
                 grid.innerHTML = related.map(p => {
                     const imgSrc = window.resolveImagePath(p.image);
                     return `
-                        <div class="glass p-4 rounded-xl group/card cursor-pointer hover:border-weld-orange/50 transition-all duration-300 flex flex-col h-full relative" onclick="window.location.href='product-detail.html?id=${p.id}'">
+                        <div class="glass p-4 rounded-xl group/card cursor-pointer hover:border-weld-orange/50 transition-all duration-300 flex flex-col h-full relative" onclick="window.location.href='/product-detail?id=${p.id}'">
                             <div class="h-40 bg-zinc-800 rounded-lg mb-4 overflow-hidden relative">
                                 <img src="${imgSrc}" alt="${p.name}" class="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500">
                                 
@@ -384,7 +384,7 @@
                                 </button>
                             </div>
                             <h4 class="text-white font-bold text-sm mb-1 group-hover/card:text-weld-orange transition-colors truncate">${p.name}</h4>
-                            <p class="text-gray-500 text-xs">${p.category}</p>
+                            <p class="text-gray-500 text-xs uppercase">${p.category}</p>
                         </div>
                     `;
                 }).join('');

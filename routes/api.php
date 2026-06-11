@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         // Category Management Routes
         Route::post('/categories', [\App\Http\Controllers\ProductUpdaterController::class, 'storeCategory']);
         Route::put('/categories/{id}', [\App\Http\Controllers\ProductUpdaterController::class, 'updateCategory']);
+        Route::delete('/categories/{id}', [\App\Http\Controllers\ProductUpdaterController::class, 'destroyCategory']);
 
         // Message Management Routes
         Route::get('/messages', [\App\Http\Controllers\MessageController::class, 'index']);

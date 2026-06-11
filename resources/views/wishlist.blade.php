@@ -222,7 +222,7 @@
                 
                 return `
                     <div class="glass rounded-xl overflow-hidden group border border-white/5 hover:border-weld-orange/50 transition-all duration-300 flex flex-col h-full relative" id="wishlist-item-${p.id}">
-                        <div class="relative h-48 overflow-hidden bg-zinc-800 cursor-pointer" onclick="window.location.href='product-detail.html?id=${p.id}'">
+                        <div class="relative h-48 overflow-hidden bg-zinc-800 cursor-pointer" onclick="window.location.href='/product-detail?id=${p.id}'">
                             <img src="${imgSrc}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             
                             <!-- Remove from Wishlist -->
@@ -240,10 +240,10 @@
                                 <span class="text-xs text-weld-orange font-bold uppercase tracking-wider">ClassicWeld</span>
                                 <div class="flex items-center text-xs text-yellow-500"><i class="ph-fill ph-star mr-1"></i> ${rating}</div>
                             </div>
-                            <h3 class="text-lg font-bold mb-4 group-hover:text-weld-orange transition-colors cursor-pointer truncate" onclick="window.location.href='product-detail.html?id=${p.id}'">${p.name}</h3>
+                            <h3 class="text-lg font-bold mb-4 group-hover:text-weld-orange transition-colors cursor-pointer truncate" onclick="window.location.href='/product-detail?id=${p.id}'">${p.name}</h3>
                             
                             <div class="grid grid-cols-2 gap-2 mt-auto">
-                                <button onclick="window.location.href='product-detail.html?id=${p.id}'" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-bold py-2 rounded-lg transition-colors border border-zinc-700">Details</button>
+                                <button onclick="window.location.href='/product-detail?id=${p.id}'" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-bold py-2 rounded-lg transition-colors border border-zinc-700">Details</button>
                                 <button onclick="addToCart(${p.id}, '${p.name.replace(/'/g, "\\'")}', 0, '${imgSrc}')" class="w-full bg-weld-orange hover:bg-amber-600 text-white text-sm font-bold py-2 rounded-lg transition-colors flex items-center justify-center gap-1">
                                     <i class="ph-bold ph-shopping-cart"></i> Cart
                                 </button>

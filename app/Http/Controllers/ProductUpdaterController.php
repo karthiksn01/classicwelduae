@@ -39,6 +39,20 @@ class ProductUpdaterController extends Controller
         return response()->json(['message' => 'Category updated', 'category' => $category]);
     }
 
+    public function destroyCategory($id)
+    {
+        $category = Category::findOrFail($id);
+        
+        // Uncategorize products that belonged to this category
+        Product::where('category_id', $id)->update([
+            'category_id' => null,
+            'category' => null
+        ]);
+        
+        $category->delete();
+        return response()->json(['message' => 'Category deleted successfully']);
+    }
+
     // --- PRODUCT MANAGEMENT ---
 
     public function indexAdmin()

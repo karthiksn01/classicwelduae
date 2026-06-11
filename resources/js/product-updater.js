@@ -440,6 +440,31 @@ window.forceDeleteProduct = async (id) => {
 };
 
 
+
+window.deleteCategory = async (id) => {
+    const confirmed = await window.showConfirm("Delete Category", "Are you sure you want to delete this category? All products under it will be uncategorized.");
+    if(confirmed) {
+        try {
+            const res = await fetch(`${API_BASE}/categories/${id}`, {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: { 'Accept': 'application/json' }
+            });
+            if(res.ok) {
+                fetchCategories();
+                fetchProducts();
+            } else {
+                const err = await res.json();
+                alert("Error deleting category: " + (err.message || 'Action failed'));
+            }
+        } catch(e) { 
+            console.error(e); 
+            alert("Network Error while deleting category.");
+        }
+    }
+};
+
+
 // --- CATEGORY MODAL ---
 
 window.openCategoryModal = () => document.getElementById('category-modal').classList.remove('hidden');

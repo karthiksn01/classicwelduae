@@ -358,4 +358,9 @@ body {
   font-family: 'Moon Dance', cursive !important;
 }
 
+.category-link {
+  text-transform: uppercase;
+}
+
+
 
