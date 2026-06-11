@@ -220,9 +220,9 @@
                             <div class="flex flex-col gap-4 mb-8">
                                 <div class="flex items-center gap-4">
                                     <div class="flex items-center border border-white/10 rounded-lg overflow-hidden bg-zinc-900 w-32 shrink-0">
-                                        <button onclick="updateQty(-1)" class="px-4 py-3 text-gray-400 hover:text-white hover:bg-zinc-800 transition-colors">-</button>
-                                        <input type="number" id="product-qty" value="1" min="1" class="w-full bg-transparent text-center font-bold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-                                        <button onclick="updateQty(1)" class="px-4 py-3 text-gray-400 hover:text-white hover:bg-zinc-800 transition-colors">+</button>
+                                        <button onclick="updateQty(-1)" class="px-4 py-3 text-gray-400 hover:text-white hover:bg-zinc-800 transition-colors" ${product.is_sold_out ? 'disabled' : ''}>-</button>
+                                        <input type="number" id="product-qty" value="1" min="1" ${product.is_sold_out ? 'disabled' : ''} class="w-full bg-transparent text-center font-bold focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                                        <button onclick="updateQty(1)" class="px-4 py-3 text-gray-400 hover:text-white hover:bg-zinc-800 transition-colors" ${product.is_sold_out ? 'disabled' : ''}>+</button>
                                     </div>
                                     <button onclick="window.toggleWishlist(${product.id}, event)" 
                                             data-wishlist-id="${product.id}"
@@ -231,9 +231,14 @@
                                         <i class="${window.userWishlist.includes(product.id) ? 'ph-fill ph-heart text-red-500' : 'ph ph-heart text-white'} text-2xl group-hover/wishlist:scale-110 transition-transform"></i>
                                     </button>
                                 </div>
-                                <button onclick="handleAddToCart()" data-product-id="${product.id}" class="add-to-cart-btn w-full bg-weld-orange hover:bg-amber-600 text-white font-bold py-4 rounded-lg transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-lg">
-                                    <i class="ph-bold ph-shopping-cart text-xl"></i> Add to Cart
-                                </button>
+                                ${product.is_sold_out 
+                                    ? `<button disabled class="w-full bg-zinc-800 text-gray-500 font-bold py-4 rounded-lg cursor-not-allowed border border-zinc-800 flex items-center justify-center gap-2 text-lg">
+                                           <i class="ph-bold ph-prohibit text-xl"></i> Out of Stock
+                                       </button>`
+                                    : `<button onclick="handleAddToCart()" data-product-id="${product.id}" class="add-to-cart-btn w-full bg-weld-orange hover:bg-amber-600 text-white font-bold py-4 rounded-lg transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-lg">
+                                           <i class="ph-bold ph-shopping-cart text-xl"></i> Add to Cart
+                                       </button>`
+                                }
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-400 border-t border-white/5 pt-8">
@@ -271,7 +276,7 @@
                                 <table class="w-full text-left">
                                     <tr class="border-b border-white/5"><th class="p-4 text-white font-medium w-1/3">Category</th><td class="p-4">${product.category}</td></tr>
                                     <tr class="border-b border-white/5"><th class="p-4 text-white font-medium">Brand</th><td class="p-4">${brand}</td></tr>
-                                    <tr class="border-b border-white/5"><th class="p-4 text-white font-medium">Stock Status</th><td class="p-4">${product.stock > 0 ? '<span class="text-green-500">In Stock</span>' : '<span class="text-red-500">Out of Stock</span>'}</td></tr>
+                                    <tr class="border-b border-white/5"><th class="p-4 text-white font-medium">Stock Status</th><td class="p-4">${!product.is_sold_out ? '<span class="text-green-500">In Stock</span>' : '<span class="text-red-500">Out of Stock</span>'}</td></tr>
                                     ${(() => {
                                         let specRows = '';
                                         if (product.specifications && Object.keys(product.specifications).length > 0) {
