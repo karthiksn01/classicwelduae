@@ -250,16 +250,99 @@
                         </div>
                     </div>
 
-                    <!-- Tabs: Description / Features / Specs -->
+                    <!-- Tabs: Description / Features -->
                     <div class="glass rounded-2xl p-5 md:p-8 mb-16 border border-white/5 overflow-hidden">
                         <div class="flex space-x-6 md:space-x-8 border-b border-white/10 mb-8 overflow-x-auto no-scrollbar pb-1">
                             <button onclick="switchTab('description')" id="tab-btn-description" class="tab-btn text-weld-orange font-bold text-sm md:text-lg border-b-2 border-weld-orange pb-4 -mb-[2px] transition-all whitespace-nowrap">Description</button>
                             <button onclick="switchTab('features')" id="tab-btn-features" class="tab-btn text-gray-400 hover:text-white font-medium text-sm md:text-lg pb-4 -mb-[2px] transition-all border-b-2 border-transparent hover:border-white/20 whitespace-nowrap">Features</button>
-                            <button onclick="switchTab('specifications')" id="tab-btn-specifications" class="tab-btn text-gray-400 hover:text-white font-medium text-sm md:text-lg pb-4 -mb-[2px] transition-all border-b-2 border-transparent hover:border-white/20 whitespace-nowrap">Specifications</button>
                         </div>
                         
                         <div id="tab-content-description" class="tab-content prose prose-invert max-w-none text-gray-400">
-                            <p>${product.description || 'This premium equipment is designed for rigorous industrial applications, providing consistent performance and durability.'}</p>
+                            <p class="mb-8 text-gray-300">${product.description || 'This premium equipment is designed for rigorous industrial applications, providing consistent performance and durability.'}</p>
+                            
+                            ${(() => {
+                                if (!product.specifications || Object.keys(product.specifications).length === 0) {
+                                    return '';
+                                }
+                                
+                                const keys = Object.keys(product.specifications);
+                                const hasGas = keys.some(k => k.toLowerCase() === 'gas');
+                                const hasPressure = keys.some(k => k.toLowerCase().includes('pressure'));
+                                
+                                if (hasGas && hasPressure) {
+                                    const modelNo = product.specifications['Model No'] || product.specifications['Model'] || '';
+                                    const gases = (product.specifications['Gas'] || '').split(',').map(s => s.trim());
+                                    const maxInlets = (product.specifications['Max Inlet Pressure (kpa)'] || product.specifications['Max Inlet Pressure'] || '').split(',').map(s => s.trim());
+                                    const maxOutlets = (product.specifications['Max Outlet Pressure (kpa)'] || product.specifications['Max Outlet Pressure'] || '').split(',').map(s => s.trim());
+                                    const inletConns = (product.specifications['Inlet Connection'] || '').split(',').map(s => s.trim());
+                                    const outletConns = (product.specifications['Outlet Connection'] || '').split(',').map(s => s.trim());
+                                    
+                                    const maxRows = Math.max(gases.length, maxInlets.length, maxOutlets.length, inletConns.length, outletConns.length);
+                                    
+                                    let rowsHtml = '';
+                                    for (let i = 0; i < maxRows; i++) {
+                                        rowsHtml += `
+                                            <tr class="border-b border-white/5 last:border-0 hover:bg-zinc-800/30 transition-colors">
+                                                ${i === 0 ? `<td class="p-4 border-r border-white/10 font-bold text-white align-middle text-center" rowspan="${maxRows}">${modelNo}</td>` : ''}
+                                                <td class="p-4 border-r border-white/10 text-white font-medium">${gases[i] || ''}</td>
+                                                <td class="p-4 border-r border-white/10 text-center">${maxInlets[i] || ''}</td>
+                                                <td class="p-4 border-r border-white/10 text-center">${maxOutlets[i] || ''}</td>
+                                                <td class="p-4 border-r border-white/10">${inletConns[i] || ''}</td>
+                                                <td class="p-4">${outletConns[i] || ''}</td>
+                                            </tr>
+                                        `;
+                                    }
+                                    
+                                    return `
+                                        <div class="mt-8 border-t border-white/10 pt-8">
+                                            <h3 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
+                                                <i class="ph ph-list-bullets text-weld-orange"></i> Specifications
+                                            </h3>
+                                            <div class="overflow-x-auto rounded-xl border border-white/10 bg-zinc-900/30">
+                                                <table class="w-full border-collapse text-left text-sm text-gray-300">
+                                                    <thead>
+                                                        <tr class="border-b border-white/10 bg-zinc-950/80 text-white font-bold">
+                                                            <th class="p-4 border-r border-white/10 text-center">Model No</th>
+                                                            <th class="p-4 border-r border-white/10">Gas</th>
+                                                            <th class="p-4 border-r border-white/10 text-center">Max Inlet Pressure<br><span class="text-xs text-gray-400 font-normal">(kpa)</span></th>
+                                                            <th class="p-4 border-r border-white/10 text-center">Max Outlet Pressure<br><span class="text-xs text-gray-400 font-normal">(kpa)</span></th>
+                                                            <th class="p-4 border-r border-white/10">Inlet Connection</th>
+                                                            <th class="p-4">Outlet Connection</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        ${rowsHtml}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    `;
+                                } else {
+                                    let specRows = '';
+                                    specRows += `<tr class="border-b border-white/5"><th class="p-4 text-white font-semibold w-1/3 border-r border-white/10">Category</th><td class="p-4 uppercase">${product.category || 'Uncategorized'}</td></tr>`;
+                                    specRows += `<tr class="border-b border-white/5"><th class="p-4 text-white font-semibold border-r border-white/10">Brand</th><td class="p-4">${brand}</td></tr>`;
+                                    specRows += `<tr class="border-b border-white/5"><th class="p-4 text-white font-semibold border-r border-white/10">Stock Status</th><td class="p-4">${!product.is_sold_out ? '<span class="text-green-500 font-medium">In Stock</span>' : '<span class="text-red-500 font-medium">Out of Stock</span>'}</td></tr>`;
+                                    
+                                    for (const [key, value] of Object.entries(product.specifications)) {
+                                        specRows += `<tr class="border-b border-white/5"><th class="p-4 text-white font-semibold capitalize border-r border-white/10">${key.replace(/_/g, ' ')}</th><td class="p-4 uppercase">${value}</td></tr>`;
+                                    }
+                                    
+                                    return `
+                                        <div class="mt-8 border-t border-white/10 pt-8">
+                                            <h3 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
+                                                <i class="ph ph-list-bullets text-weld-orange"></i> Specifications
+                                            </h3>
+                                            <div class="overflow-x-auto rounded-xl border border-white/10 bg-zinc-900/30">
+                                                <table class="w-full border-collapse text-left text-sm text-gray-300">
+                                                    <tbody>
+                                                        ${specRows}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    `;
+                                }
+                            })()}
                         </div>
                         
                         <div id="tab-content-features" class="tab-content hidden prose prose-invert max-w-none text-gray-400">
@@ -269,25 +352,6 @@
                                 }
                                 return '<p>No specific features listed for this product.</p>';
                             })()}
-                        </div>
-                        
-                        <div id="tab-content-specifications" class="tab-content hidden prose prose-invert max-w-none text-gray-400">
-                            <div class="bg-zinc-900/50 rounded-lg overflow-hidden">
-                                <table class="w-full text-left">
-                                    <tr class="border-b border-white/5"><th class="p-4 text-white font-medium w-1/3">Category</th><td class="p-4 uppercase">${product.category}</td></tr>
-                                    <tr class="border-b border-white/5"><th class="p-4 text-white font-medium">Brand</th><td class="p-4">${brand}</td></tr>
-                                    <tr class="border-b border-white/5"><th class="p-4 text-white font-medium">Stock Status</th><td class="p-4">${!product.is_sold_out ? '<span class="text-green-500">In Stock</span>' : '<span class="text-red-500">Out of Stock</span>'}</td></tr>
-                                    ${(() => {
-                                        let specRows = '';
-                                        if (product.specifications && Object.keys(product.specifications).length > 0) {
-                                            for (const [key, value] of Object.entries(product.specifications)) {
-                                                specRows += '<tr class="border-b border-white/5"><th class="p-4 text-white font-medium capitalize">' + key.replace(/_/g, ' ') + '</th><td class="p-4">' + value + '</td></tr>';
-                                            }
-                                        }
-                                        return specRows;
-                                    })()}
-                                </table>
-                            </div>
                         </div>
                     </div>
 
