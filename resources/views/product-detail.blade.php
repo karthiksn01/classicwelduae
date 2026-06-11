@@ -261,21 +261,18 @@
                             <p class="mb-8 text-gray-300">${product.description || 'This premium equipment is designed for rigorous industrial applications, providing consistent performance and durability.'}</p>
                             
                             ${(() => {
-                                if (!product.specifications || Object.keys(product.specifications).length === 0) {
-                                    return '';
-                                }
-                                
-                                const keys = Object.keys(product.specifications);
+                                const specs = product.specifications || {};
+                                const keys = Object.keys(specs);
                                 const hasGas = keys.some(k => k.toLowerCase() === 'gas');
                                 const hasPressure = keys.some(k => k.toLowerCase().includes('pressure'));
                                 
                                 if (hasGas && hasPressure) {
-                                    const modelNo = product.specifications['Model No'] || product.specifications['Model'] || '';
-                                    const gases = (product.specifications['Gas'] || '').split(',').map(s => s.trim());
-                                    const maxInlets = (product.specifications['Max Inlet Pressure (kpa)'] || product.specifications['Max Inlet Pressure'] || '').split(',').map(s => s.trim());
-                                    const maxOutlets = (product.specifications['Max Outlet Pressure (kpa)'] || product.specifications['Max Outlet Pressure'] || '').split(',').map(s => s.trim());
-                                    const inletConns = (product.specifications['Inlet Connection'] || '').split(',').map(s => s.trim());
-                                    const outletConns = (product.specifications['Outlet Connection'] || '').split(',').map(s => s.trim());
+                                    const modelNo = specs['Model No'] || specs['Model'] || '';
+                                    const gases = (specs['Gas'] || '').split(',').map(s => s.trim());
+                                    const maxInlets = (specs['Max Inlet Pressure (kpa)'] || specs['Max Inlet Pressure'] || '').split(',').map(s => s.trim());
+                                    const maxOutlets = (specs['Max Outlet Pressure (kpa)'] || specs['Max Outlet Pressure'] || '').split(',').map(s => s.trim());
+                                    const inletConns = (specs['Inlet Connection'] || '').split(',').map(s => s.trim());
+                                    const outletConns = (specs['Outlet Connection'] || '').split(',').map(s => s.trim());
                                     
                                     const maxRows = Math.max(gases.length, maxInlets.length, maxOutlets.length, inletConns.length, outletConns.length);
                                     
@@ -321,9 +318,9 @@
                                     let specRows = '';
                                     specRows += `<tr class="border-b border-white/5"><th class="p-4 text-white font-semibold w-1/3 border-r border-white/10">Category</th><td class="p-4 uppercase">${product.category || 'Uncategorized'}</td></tr>`;
                                     specRows += `<tr class="border-b border-white/5"><th class="p-4 text-white font-semibold border-r border-white/10">Brand</th><td class="p-4">${brand}</td></tr>`;
-                                    specRows += `<tr class="border-b border-white/5"><th class="p-4 text-white font-semibold border-r border-white/10">Stock Status</th><td class="p-4">${!product.is_sold_out ? '<span class="text-green-500 font-medium">In Stock</span>' : '<span class="text-red-500 font-medium">Out of Stock</span>'}</td></tr>`;
+                                    specRows += `<tr class="border-b border-white/5"><th class="p-4 text-white font-semibold border-r border-white/10">Stock Status</th><td class="p-4">${!product.is_sold_out ? '<span class="text-green-500 font-medium">In Stock</span>' : '<span class="text-red-500 font-medium text-red-500">Out of Stock</span>'}</td></tr>`;
                                     
-                                    for (const [key, value] of Object.entries(product.specifications)) {
+                                    for (const [key, value] of Object.entries(specs)) {
                                         specRows += `<tr class="border-b border-white/5"><th class="p-4 text-white font-semibold capitalize border-r border-white/10">${key.replace(/_/g, ' ')}</th><td class="p-4 uppercase">${value}</td></tr>`;
                                     }
                                     
